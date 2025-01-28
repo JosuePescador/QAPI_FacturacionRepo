@@ -1,18 +1,19 @@
 package cc.nuvu.qapi.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
+import cc.nuvu.qapi.model.FacturaRequest;
+import cc.nuvu.qapi.service.FacturaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/factura")
 public class FacturacionMasivaController {
-	
-	@GetMapping("version")
-	public String ObtenerVersion() {
-		return "1.0.0";
-	}
 
+    @Autowired
+    private FacturaService facturaService;
+
+    @PostMapping("/generar-json")
+    public String generarJsonFactura(@RequestBody FacturaRequest factura) {
+        return facturaService.generarJSONFactura(factura);
+    }
 }

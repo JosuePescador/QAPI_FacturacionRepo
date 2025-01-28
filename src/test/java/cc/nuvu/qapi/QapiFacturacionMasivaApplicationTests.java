@@ -8,6 +8,7 @@ class QapiFacturacionMasivaApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Verifica que el contexto de la aplicación cargue correctamente
 	}
 
 }
