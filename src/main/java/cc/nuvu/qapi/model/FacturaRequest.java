@@ -1,6 +1,5 @@
 package cc.nuvu.qapi.model;
 
-import java.util.Date;
 
 public class FacturaRequest {
     private String referencia;
