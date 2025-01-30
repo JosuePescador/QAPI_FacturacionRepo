@@ -33,7 +33,7 @@ public class NDebitoService {
             dataMap.put("valorUnitario", nDebitoRequest.getValorUnitario());
 
             // Agregar la categoría
-            jsonMap.put("categoria", "NDEBITO");
+            jsonMap.put("service", "NDEBITO");
             jsonMap.put("data", dataMap);
 
             // Convertir a JSON

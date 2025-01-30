@@ -38,7 +38,7 @@ public class NCreditoService {
             dataMap.put("valorUnitario", nCreditoRequest.getValorUnitario());
 
             // Agregar la categoría
-            jsonMap.put("categoria", "NCREDITO");
+            jsonMap.put("service", "NCREDITO");
             jsonMap.put("data", dataMap);
 
             // Convertir a JSON
