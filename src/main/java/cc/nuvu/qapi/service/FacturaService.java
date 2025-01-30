@@ -34,7 +34,6 @@ public class FacturaService {
             dataMap.put("dependencia", facturaRequest.getDependencia());
             dataMap.put("cuentaConsignacion", facturaRequest.getCuentaConsignacion());
             dataMap.put("conceptoFacturacion", facturaRequest.getConceptoFacturacion());
-            dataMap.put("cantidad", facturaRequest.getCantidad());
             dataMap.put("valorUnitario", facturaRequest.getValorUnitario());
             dataMap.put("conceptoAdicionales", facturaRequest.getConceptoAdicionales());
 
