@@ -23,7 +23,7 @@ public class FacturacionMasivaController {
     private PagoFacturaService pagoFacturaService;
 
     @Autowired
-    private NDebitoService nDebitoCreditoService;
+    private NDebitoCreditoService nDebitoCreditoService;
 
     @Autowired
     private SqsService sqsService;
