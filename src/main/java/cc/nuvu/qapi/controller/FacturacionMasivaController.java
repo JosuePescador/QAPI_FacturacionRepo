@@ -23,10 +23,7 @@ public class FacturacionMasivaController {
     private PagoFacturaService pagoFacturaService;
 
     @Autowired
-    private NDebitoService nDebitoService;
-
-    @Autowired
-    private NCreditoService nCreditoService;
+    private NDebitoService nDebitoCreditoService;
 
     @Autowired
     private SqsService sqsService;
@@ -67,27 +64,16 @@ public class FacturacionMasivaController {
         return respuestas;
     }
 
-    // Endpoint para generar JSON de Nota Débito
-    @PostMapping("/notaDebito/generar-json")
-    public List<String> generarJsonNDebito(@RequestBody List<NDebitoRequest> notasDebito) {
+    // Endpoint para generar JSON de Nota DébitoCredito
+    @PostMapping("/notaDebitoCredito/generar-json")
+    public List<String> generarJsonNDebitoCredito(@RequestBody List<NDebitoCreditoRequest> notasDebitoCredito) {
         List<String> respuestas = new ArrayList<>();
-        for (NDebitoRequest notaDebito : notasDebito) {
-            String jsonNDebito = nDebitoService.generarJSONNDebito(notaDebito);
-            String response = sqsService.sendMessage(jsonNDebito);
+        for (NDebitoCreditoRequest notaDebitoCredito : notasDebitoCredito) {
+            String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
+            String response = sqsService.sendMessage(jsonNDebitoCredito);
             respuestas.add(response);
         }
         return respuestas;
     }
 
-    // Endpoint para generar JSON de Nota Crédito
-    @PostMapping("/notaCredito/generar-json")
-    public List<String> generarJsonNCredito(@RequestBody List<NCreditoRequest> notasCredito) {
-        List<String> respuestas = new ArrayList<>();
-        for (NCreditoRequest notaCredito : notasCredito) {
-            String jsonNCredito = nCreditoService.generarJSONNCredito(notaCredito);
-            String response = sqsService.sendMessage(jsonNCredito);
-            respuestas.add(response);
-        }
-        return respuestas;
-    }
 }

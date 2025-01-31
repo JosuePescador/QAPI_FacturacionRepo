@@ -1,16 +1,18 @@
 package cc.nuvu.qapi.model;
 
-public class NCreditoRequest {
+public class NDebitoCreditoRequest {
+    private Integer secuencia;
+    private Integer cuentaBancaria;
+    private Integer concepto;
+    private Integer valorUnitario;
+
     private Integer vigencia;
     private String tipoDocumento;
     private String estadoDocumento;
     private Integer tipoMovimiento;
-    private Integer cuentaBancaria;
     private String tipoFacturacion;
     private Integer tercero;
-    private Integer concepto;
-    private Integer valorUnitario;
-    
+
     public Integer getVigencia() {
         return vigencia;
     }
@@ -35,12 +37,6 @@ public class NCreditoRequest {
     public void setTipoMovimiento(Integer tipoMovimiento) {
         this.tipoMovimiento = tipoMovimiento;
     }
-    public Integer getCuentaBancaria() {
-        return cuentaBancaria;
-    }
-    public void setCuentaBancaria(Integer cuentaBancaria) {
-        this.cuentaBancaria = cuentaBancaria;
-    }
     public String getTipoFacturacion() {
         return tipoFacturacion;
     }
@@ -52,6 +48,18 @@ public class NCreditoRequest {
     }
     public void setTercero(Integer tercero) {
         this.tercero = tercero;
+    }
+    public Integer getSecuencia() {
+        return secuencia;
+    }
+    public void setSecuencia(Integer secuencia) {
+        this.secuencia = secuencia;
+    }
+    public Integer getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+    public void setCuentaBancaria(Integer cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
     public Integer getConcepto() {
         return concepto;
