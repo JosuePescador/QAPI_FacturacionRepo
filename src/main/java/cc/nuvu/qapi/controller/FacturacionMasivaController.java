@@ -30,6 +30,7 @@ public class FacturacionMasivaController {
     private SqsService sqsService;
 
     // Endpoint para generar JSON de Factura
+    @PostMapping("/factura")
     public ResponseEntity<String> generarJsonFactura(@RequestBody List<FacturaRequest> facturas) {
         List<String> respuestas = new ArrayList<>();
         for (FacturaRequest factura : facturas) {
