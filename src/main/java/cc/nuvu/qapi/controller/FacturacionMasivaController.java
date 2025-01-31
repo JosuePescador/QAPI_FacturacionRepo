@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/facturacion-masiva")
 public class FacturacionMasivaController {
 
     @Autowired
@@ -29,51 +30,49 @@ public class FacturacionMasivaController {
     private SqsService sqsService;
 
     // Endpoint para generar JSON de Factura
-    @PostMapping("/factura/generar-json")
-    public List<String> generarJsonFactura(@RequestBody List<FacturaRequest> facturas) {
+    public ResponseEntity<String> generarJsonFactura(@RequestBody List<FacturaRequest> facturas) {
         List<String> respuestas = new ArrayList<>();
         for (FacturaRequest factura : facturas) {
             String jsonFactura = facturaService.generarJSONFactura(factura);
             String response = sqsService.sendMessage(jsonFactura);
             respuestas.add(response);
         }
-        return respuestas;
+        return ResponseEntity.ok("Se han procesado " + facturas.size() + " facturas y se han enviado a la cola. Respuestas: " + respuestas);
     }
 
     // Endpoint para generar JSON de Pago
-    @PostMapping("/pago/generar-json")
-    public List<String> generarJsonPago(@RequestBody List<PagoRequest> pagos) {
+    @PostMapping("/pago")
+    public ResponseEntity<String> generarJsonPago(@RequestBody List<PagoRequest> pagos) {
         List<String> respuestas = new ArrayList<>();
         for (PagoRequest pago : pagos) {
             String jsonPago = pagoService.generarJSONPago(pago);
             String response = sqsService.sendMessage(jsonPago);
             respuestas.add(response);
         }
-        return respuestas;
+        return ResponseEntity.ok("Se han procesado " + pagos.size() + " pagos y se han enviado a la cola. Respuestas: " + respuestas);
     }
 
     // Endpoint para generar JSON de Pago Factura
-    @PostMapping("/pagoFactura/generar-json")
-    public List<String> generarJsonPagoFactura(@RequestBody List<PagoFacturaRequest> pagoFacturas) {
+    @PostMapping("/pago-factura")
+    public ResponseEntity<String> generarJsonPagoFactura(@RequestBody List<PagoFacturaRequest> pagoFacturas) {
         List<String> respuestas = new ArrayList<>();
         for (PagoFacturaRequest pagoFactura : pagoFacturas) {
             String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
             String response = sqsService.sendMessage(jsonPagoFactura);
             respuestas.add(response);
         }
-        return respuestas;
+        return ResponseEntity.ok("Se han procesado " + pagoFacturas.size() + " pagos de factura y se han enviado a la cola. Respuestas: " + respuestas);
     }
 
     // Endpoint para generar JSON de Nota DébitoCredito
-    @PostMapping("/notaDebitoCredito/generar-json")
-    public List<String> generarJsonNDebitoCredito(@RequestBody List<NDebitoCreditoRequest> notasDebitoCredito) {
+    @PostMapping("/nota")
+    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody List<NDebitoCreditoRequest> notasDebitoCredito) {
         List<String> respuestas = new ArrayList<>();
         for (NDebitoCreditoRequest notaDebitoCredito : notasDebitoCredito) {
             String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
             String response = sqsService.sendMessage(jsonNDebitoCredito);
             respuestas.add(response);
         }
-        return respuestas;
+        return ResponseEntity.ok("Se han procesado " + notasDebitoCredito.size() + " notas débito/crédito y se han enviado a la cola. Respuestas: " + respuestas);
     }
-
 }
