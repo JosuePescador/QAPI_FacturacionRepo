@@ -35,7 +35,7 @@ public class PagoService {
             dataMap.put("referencia", pagoRequest.getReferencia());
 
             // Agregar la categoría
-            jsonMap.put("service", "PAGO");
+            jsonMap.put("service", "pago");
             jsonMap.put("data", dataMap);
 
             // Convertir a JSON
