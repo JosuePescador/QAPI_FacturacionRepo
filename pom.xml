@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>cc.nuvu.qapi</groupId>
 	<artifactId>QAPI_FacturacionMasiva</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>QAPI_FacturacionMasiva</name>
 	<description>FacturacionMasiva</description>
 	<url/>
