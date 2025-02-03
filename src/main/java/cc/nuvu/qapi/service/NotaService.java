@@ -1,6 +1,6 @@
 package cc.nuvu.qapi.service;
 
-import cc.nuvu.qapi.model.NDebitoCreditoRequest;
+import cc.nuvu.qapi.model.NotaRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class NDebitoCreditoService {
+public class NotaService {
 
     /**
      * Genera un JSON con los campos proporcionados por el cliente y añade la categoría FACTURA.
@@ -17,7 +17,7 @@ public class NDebitoCreditoService {
      * @return String con el JSON generado.
      */
 
-    public String generarJSONNDebito(NDebitoCreditoRequest nDebitoCreditoRequest) {
+    public String generarJSONNDebito(NotaRequest nDebitoCreditoRequest) {
         if (nDebitoCreditoRequest == null) {
             throw new IllegalArgumentException("nDebitoCreditoRequest no puede ser nulo");
         }
@@ -44,7 +44,7 @@ public class NDebitoCreditoService {
             dataMap.put("valorUnitario", nDebitoCreditoRequest.getValorUnitario());
 
             // Agregar la categoría
-            jsonMap.put("service", "nota");
+            jsonMap.put("service", "NOTA");
             jsonMap.put("data", dataMap);
 
             // Convertir a JSON

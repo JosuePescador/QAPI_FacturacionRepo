@@ -12,11 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JwtFiltroAutorizacion extends OncePerRequestFilter {
+public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
-    public JwtFiltroAutorizacion(JwtUtil jwtUtil) {
+    public JwtAuthorizationFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
@@ -24,7 +24,11 @@ public class JwtFiltroAutorizacion extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+                
+
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization Header: " + authHeader); // Verifica el encabezado
+
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Falta token de autorización");
@@ -39,7 +43,8 @@ public class JwtFiltroAutorizacion extends OncePerRequestFilter {
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado");
                 return;
             }
-        } catch (JwtException e) {
+        }
+        catch (JwtException e) {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token no válido: " + e.getMessage());
             return;
         } catch (Exception e) {

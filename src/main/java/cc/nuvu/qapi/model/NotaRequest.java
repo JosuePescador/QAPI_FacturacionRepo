@@ -1,6 +1,6 @@
 package cc.nuvu.qapi.model;
 
-public class NDebitoCreditoRequest {
+public class NotaRequest {
     private Integer secuencia;
     private Integer cuentaBancaria;
     private Integer concepto;

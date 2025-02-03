@@ -55,7 +55,7 @@ public class FacturaService {
             dataMap.put("correoElectronico", facturaRequest.getCorreoElectronico());
 
             // Agregar la categoría
-            jsonMap.put("service", "factura");
+            jsonMap.put("service", "FACTURA");
             jsonMap.put("data", dataMap);
 
             // Convertir a JSON

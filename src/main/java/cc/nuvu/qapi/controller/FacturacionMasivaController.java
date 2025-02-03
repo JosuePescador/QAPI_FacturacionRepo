@@ -1,6 +1,5 @@
 package cc.nuvu.qapi.controller;
 
-import cc.nuvu.qapi.check.Home;
 import cc.nuvu.qapi.model.*;
 import cc.nuvu.qapi.service.*;
 
@@ -22,7 +21,7 @@ public class FacturacionMasivaController {
     private PagoFacturaService pagoFacturaService;
 
     @Autowired
-    private NDebitoCreditoService nDebitoCreditoService;
+    private NotaService nDebitoCreditoService;
 
     @Autowired
     private SqsService sqsService;
@@ -32,8 +31,7 @@ public class FacturacionMasivaController {
   public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
       String jsonFactura = facturaService.generarJSONFactura(factura);
       String response = sqsService.sendMessage(jsonFactura);
-      String mensaje = Home.generarMensajeFactura(1); // 1 porque es un solo registro
-      return ResponseEntity.ok(mensaje + " Respuesta: " + response);
+      return ResponseEntity.ok("Se ha procesado 1 factura y se ha enviado a la cola. Respuesta: " + response);
   }
 
     // Endpoint para generar JSON de Pago (objeto individual)
@@ -41,8 +39,7 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
         String jsonPago = pagoService.generarJSONPago(pago);
         String response = sqsService.sendMessage(jsonPago);
-        String mensaje = Home.generarMensajePago(1); // 1 porque es un solo registro
-        return ResponseEntity.ok(mensaje + " Respuesta: " + response);
+        return ResponseEntity.ok("Se ha procesado 1 pago y se ha enviado a la cola. Respuesta: " + response);
     }
 
     // Endpoint para generar JSON de Pago Factura (objeto individual)
@@ -50,16 +47,14 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
         String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
         String response = sqsService.sendMessage(jsonPagoFactura);
-        String mensaje = Home.generarMensajePagoFactura(1); // 1 porque es un solo registro
-        return ResponseEntity.ok(mensaje + " Respuesta: " + response);
+        return ResponseEntity.ok("Se ha procesado 1 pago-factura y se ha enviado a la cola. Respuesta: " + response);
     }
 
     // Endpoint para generar JSON de Nota Débito/Crédito (objeto individual)
     @PostMapping("/nota")
-    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NDebitoCreditoRequest notaDebitoCredito) {
+    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
         String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
         String response = sqsService.sendMessage(jsonNDebitoCredito);
-        String mensaje = Home.generarMensajeNota(1); // 1 porque es un solo registro
-        return ResponseEntity.ok(mensaje + " Respuesta: " + response);
+        return ResponseEntity.ok("Se ha procesado 1 nota y se ha enviado a la cola. Respuesta: " + response);
     }
 }

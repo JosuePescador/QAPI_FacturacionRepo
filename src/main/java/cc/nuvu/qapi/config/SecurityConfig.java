@@ -6,15 +6,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import cc.nuvu.qapi.security.JwtFiltroAutorizacion;
+import cc.nuvu.qapi.security.JwtAuthorizationFilter;
 import cc.nuvu.qapi.security.JwtUtil;
 
 @Configuration
-public class ConfiguracionSeguridad {
+public class SecurityConfig {
 
     private final JwtUtil jwtUtil;
 
-    public ConfiguracionSeguridad(JwtUtil jwtUtil) {
+    public SecurityConfig(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
@@ -24,7 +24,7 @@ public class ConfiguracionSeguridad {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-            .addFilterBefore(new JwtFiltroAutorizacion(jwtUtil), 
+            .addFilterBefore(new JwtAuthorizationFilter(jwtUtil), 
             org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
