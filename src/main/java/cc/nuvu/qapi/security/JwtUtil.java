@@ -6,7 +6,9 @@ import java.util.Date;
 import cc.nuvu.qapi.service.SecretService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JwtUtil {
 
     private final SecretService secretService;
@@ -19,8 +21,8 @@ public class JwtUtil {
     public Claims parseToken(String token) throws JwtException {
         String secretKey = secretService.getSecret(); // 🔹 Obtiene la clave desde AWS
         return Jwts.parserBuilder()
-        .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
-        .build()
+                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -30,12 +32,7 @@ public class JwtUtil {
         Date exp = claims.getExpiration();
         Date nbf = claims.getNotBefore();
 
-        if (exp != null && exp.before(now)) {
-            return false; // Token expirado
-        }
-        if (nbf != null && nbf.after(now)) {
-            return false; // Token aún no válido
-        }
-        return true;
+        return (exp == null || !exp.before(now)) && (nbf == null || !nbf.after(now));
+
     }
 }
