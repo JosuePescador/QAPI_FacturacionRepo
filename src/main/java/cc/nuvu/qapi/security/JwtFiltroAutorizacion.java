@@ -14,6 +14,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtFiltroAutorizacion extends OncePerRequestFilter {
 
+    private final JwtUtil jwtUtil;
+
+    public JwtFiltroAutorizacion(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -28,7 +34,7 @@ public class JwtFiltroAutorizacion extends OncePerRequestFilter {
         String token = authHeader.replace("Bearer ", "").trim();
 
         try {
-            Claims claims = JwtUtil.parseToken(token);
+            Claims claims = jwtUtil.parseToken(token);
             if (!JwtUtil.isTokenValid(claims)) {
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado");
                 return;

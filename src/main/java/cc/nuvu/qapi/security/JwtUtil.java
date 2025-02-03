@@ -3,17 +3,24 @@ package cc.nuvu.qapi.security;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+import cc.nuvu.qapi.service.SecretService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "clave-segura-de-al-menos-32-caracteres";
+    private final SecretService secretService;
 
-    public static Claims parseToken(String token) throws JwtException {
+    public JwtUtil(SecretService secretService) {
+        this.secretService = secretService;
+    }
+    
+
+    public Claims parseToken(String token) throws JwtException {
+        String secretKey = secretService.getSecret(); // 🔹 Obtiene la clave desde AWS
         return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8)))
-                .build()
+        .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+        .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
