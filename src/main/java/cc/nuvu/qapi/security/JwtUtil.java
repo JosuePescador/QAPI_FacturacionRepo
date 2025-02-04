@@ -8,6 +8,8 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Component
 public class JwtUtil {
 
@@ -17,15 +19,32 @@ public class JwtUtil {
         this.secretService = secretService;
     }
     
-    public Claims parseToken(String token) throws JwtException {
-        String secretKey = secretService.getSecret(); // 🔹 Obtiene la clave desde AWS
-        System.out.println("Using Secret: " + secretKey);  // Verifica el secreto usado
-        return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+public Claims parseToken(String token) throws JwtException {
+    String secretJson = secretService.getSecret();
+
+    String secretKey;
+    try {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(secretJson);
+        secretKey = jsonNode.get("secret").asText();
+    } catch (Exception e) {
+        throw new RuntimeException("Error al procesar el secreto JWT", e);
     }
+
+    secretKey = secretKey.trim().replaceAll("[^\\x20-\\x7E]", "");
+
+    if (secretKey.isEmpty()) {
+        throw new IllegalArgumentException("El secreto JWT no es válido.");
+    }
+
+    System.out.println(secretKey);
+
+    return Jwts.parserBuilder()
+            .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+}
     
     
 
