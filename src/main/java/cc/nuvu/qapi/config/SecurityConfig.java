@@ -3,19 +3,20 @@ package cc.nuvu.qapi.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import cc.nuvu.qapi.security.JwtAuthorizationFilter;
-import cc.nuvu.qapi.security.JwtUtil;
+import cc.nuvu.qapi.security.JwtAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
 
-    private final JwtUtil jwtUtil;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
@@ -23,13 +24,17 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/login", "/health", "/public/**").permitAll() // Permite estas rutas
-            .anyRequest().authenticated()
-        )
-            .addFilterBefore(new JwtAuthorizationFilter(jwtUtil), 
-                    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
-            return http.build();
+            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+     // Ignore selected URIs from security checks
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+       // Ignore static directories from Security Filter Chain
+       return web -> web.ignoring().requestMatchers( "/","/status");
     }
 }
 
