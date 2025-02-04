@@ -127,7 +127,6 @@
     		<artifactId>secretsmanager</artifactId>
     		<version>2.20.130</version>
 		</dependency>
-
 	</dependencies>
 
 	

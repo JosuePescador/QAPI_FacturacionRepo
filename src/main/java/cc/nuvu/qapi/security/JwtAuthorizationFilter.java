@@ -1,14 +1,9 @@
 package cc.nuvu.qapi.security;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -45,12 +40,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token inválido o expirado");
                 return;
             }
-    
-            // Aquí se establece el contexto de seguridad para permitir el acceso
-            Authentication authentication = new UsernamePasswordAuthenticationToken(claims.getSubject(), null, Collections.emptyList());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-    
-        } catch (JwtException e) {
+        }
+        catch (JwtException e) {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token no válido: " + e.getMessage());
             return;
         } catch (Exception e) {

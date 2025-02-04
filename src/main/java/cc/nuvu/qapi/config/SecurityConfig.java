@@ -23,10 +23,13 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+            .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/auth/login", "/health", "/public/**").permitAll() // Permite estas rutas
+            .anyRequest().authenticated()
+        )
             .addFilterBefore(new JwtAuthorizationFilter(jwtUtil), 
-            org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+                    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+            return http.build();
     }
 }
 
