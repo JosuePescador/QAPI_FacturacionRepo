@@ -20,6 +20,7 @@ public class JwtUtil {
 
     public Claims parseToken(String token) throws JwtException {
         String secretKey = secretService.getSecret(); // 🔹 Obtiene la clave desde AWS
+        System.out.println("Using Secret: " + secretKey);  // Verifica el secreto usado
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .build()
