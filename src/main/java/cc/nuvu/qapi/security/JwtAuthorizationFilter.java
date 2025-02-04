@@ -29,7 +29,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
     
         String authHeader = request.getHeader("Authorization");
-        System.out.println("Authorization Header: " + authHeader); // Verifica el encabezado
+        System.out.println(authHeader); // Verifica el encabezado
+        
     
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Falta token de autorización");
