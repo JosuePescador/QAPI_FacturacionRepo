@@ -48,7 +48,6 @@ public class SecretService {
             JsonNode jsonNode = objectMapper.readTree(secretJson);
             String secret = jsonNode.get("secret").asText();
             
-            System.out.println(secret);
             
             return secret;
         } catch (Exception e) {
