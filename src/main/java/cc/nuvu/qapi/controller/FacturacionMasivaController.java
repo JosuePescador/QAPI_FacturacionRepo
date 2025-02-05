@@ -4,6 +4,8 @@ import cc.nuvu.qapi.model.*;
 import cc.nuvu.qapi.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,31 +32,59 @@ public class FacturacionMasivaController {
     @PostMapping("/factura")
     public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
         String jsonFactura = facturaService.generarJSONFactura(factura);
-        String response = sqsService.sendMessage(jsonFactura);
-        return ResponseEntity.ok(" Respuesta: " + response);
+        try {
+            String response = sqsService.sendMessage(jsonFactura);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            String message = "Ha ocurrido un error al enviar el mensaje de factura";
+            System.out.println(message);
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Endpoint para generar JSON de Pago (objeto individual)
     @PostMapping("/pago")
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
         String jsonPago = pagoService.generarJSONPago(pago);
-        String response = sqsService.sendMessage(jsonPago);
-        return ResponseEntity.ok(" Respuesta: " + response);
+        try {
+            String response = sqsService.sendMessage(jsonPago);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            String message = "Ha ocurrido un error al enviar el mensaje de factura";
+            System.out.println(message);
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Endpoint para generar JSON de Pago Factura (objeto individual)
     @PostMapping("/pago-factura")
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
         String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
-        String response = sqsService.sendMessage(jsonPagoFactura);
-        return ResponseEntity.ok(" Respuesta: " + response);
+        try {
+            String response = sqsService.sendMessage(jsonPagoFactura);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            String message = "Ha ocurrido un error al enviar el mensaje de factura";
+            System.out.println(message);
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Endpoint para generar JSON de Nota Débito/Crédito (objeto individual)
     @PostMapping("/nota")
     public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
         String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
-        String response = sqsService.sendMessage(jsonNDebitoCredito);
-        return ResponseEntity.ok(" Respuesta: " + response);
+        try {
+            String response = sqsService.sendMessage(jsonNDebitoCredito);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            String message = "Ha ocurrido un error al enviar el mensaje de factura";
+            System.out.println(message);
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
