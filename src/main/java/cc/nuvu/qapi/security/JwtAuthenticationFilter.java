@@ -41,6 +41,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        String path = request.getServletPath();
+        if (path.equals("/") || path.equals("/status")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
@@ -58,7 +64,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
-
 
             // Validar `exp` y `nbf`
             long now = System.currentTimeMillis() / 1000;
