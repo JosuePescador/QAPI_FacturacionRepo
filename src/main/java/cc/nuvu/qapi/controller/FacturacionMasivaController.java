@@ -26,20 +26,20 @@ public class FacturacionMasivaController {
     @Autowired
     private SqsService sqsService;
 
-  // Endpoint para generar JSON de Factura (objeto individual)
-  @PostMapping("/factura")
-  public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
-      String jsonFactura = facturaService.generarJSONFactura(factura);
-      String response = sqsService.sendMessage(jsonFactura);
-      return ResponseEntity.ok("Se ha procesado 1 factura y se ha enviado a la cola. Respuesta: " + response);
-  }
+    // Endpoint para generar JSON de Factura (objeto individual)
+    @PostMapping("/factura")
+    public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
+        String jsonFactura = facturaService.generarJSONFactura(factura);
+        String response = sqsService.sendMessage(jsonFactura);
+        return ResponseEntity.ok(" Respuesta: " + response);
+    }
 
     // Endpoint para generar JSON de Pago (objeto individual)
     @PostMapping("/pago")
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
         String jsonPago = pagoService.generarJSONPago(pago);
         String response = sqsService.sendMessage(jsonPago);
-        return ResponseEntity.ok("Se ha procesado 1 pago y se ha enviado a la cola. Respuesta: " + response);
+        return ResponseEntity.ok(" Respuesta: " + response);
     }
 
     // Endpoint para generar JSON de Pago Factura (objeto individual)
@@ -47,7 +47,7 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
         String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
         String response = sqsService.sendMessage(jsonPagoFactura);
-        return ResponseEntity.ok("Se ha procesado 1 pago-factura y se ha enviado a la cola. Respuesta: " + response);
+        return ResponseEntity.ok(" Respuesta: " + response);
     }
 
     // Endpoint para generar JSON de Nota Débito/Crédito (objeto individual)
@@ -55,6 +55,6 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
         String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
         String response = sqsService.sendMessage(jsonNDebitoCredito);
-        return ResponseEntity.ok("Se ha procesado 1 nota y se ha enviado a la cola. Respuesta: " + response);
+        return ResponseEntity.ok(" Respuesta: " + response);
     }
 }
