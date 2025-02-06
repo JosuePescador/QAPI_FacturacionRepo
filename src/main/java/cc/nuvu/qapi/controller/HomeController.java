@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @GetMapping(value = { "", "/", "/status" }, produces = MediaType.TEXT_PLAIN_VALUE)
     public String getStatus() {
-        return "1.0.3";
+        return "1.0.4";
     }
 }
