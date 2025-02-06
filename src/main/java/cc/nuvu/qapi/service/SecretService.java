@@ -4,7 +4,9 @@ import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.stereotype.Service;
@@ -48,82 +50,13 @@ public class SecretService {
             JsonNode jsonNode = objectMapper.readTree(secretJson);
             String secret = jsonNode.get("secret").asText();
             
+            // Decodificar el secreto si está en Base64
+            byte[] decodedBytes = Base64.getDecoder().decode(secret);
+            String decodedSecret = new String(decodedBytes, StandardCharsets.UTF_8);
             
-            return secret;
+            return decodedSecret;
         } catch (Exception e) {
             throw new RuntimeException("Error al parsear el secreto JSON", e);
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* package cc.nuvu.qapi.service;
-import java.time.LocalDate;
-import java.util.concurrent.locks.ReentrantLock;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
-import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
-import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
-@Service
-public class SecretService {
-    @Value("${secret.jwt}")
-    private String cachedSecret;
-    private static final String SECRET_NAME = "uca/test/factmasiva/api/jwt-secret";
-    //private String cachedSecret;
-    private LocalDate lastFetchDate;
-    private final ReentrantLock lock = new ReentrantLock();
-    public String getSecret() {
-         LocalDate today = LocalDate.now();
-        if (cachedSecret == null || lastFetchDate == null || !lastFetchDate.equals(today)) {
-            lock.lock();
-            try {
-                if (cachedSecret == null || lastFetchDate == null || !lastFetchDate.equals(today)) {
-                    cachedSecret = fetchSecretFromAWS();
-                    lastFetchDate = today;
-                }
-            } finally {
-                lock.unlock();
-            }
-        } 
-        return cachedSecret;
-    }
-    private String fetchSecretFromAWS() {
-        SecretsManagerClient client = SecretsManagerClient.create();
-        GetSecretValueRequest request = GetSecretValueRequest.builder().secretId(SECRET_NAME).build();
-        GetSecretValueResponse response = client.getSecretValue(request);
-        return response.secretString();
-    }
-} 
-*/
