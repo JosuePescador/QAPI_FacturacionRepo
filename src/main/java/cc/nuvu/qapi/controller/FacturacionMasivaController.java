@@ -28,11 +28,15 @@ public class FacturacionMasivaController {
     @Autowired
     private SqsService sqsService;
 
+    @Autowired
+    private S3Service s3Service;
+
     // Endpoint para generar JSON de Factura (objeto individual)
     @PostMapping("/factura")
     public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
         String jsonFactura = facturaService.generarJSONFactura(factura);
         try {
+            s3Service.uploadJson(jsonFactura, "factura");
             String response = sqsService.sendMessage(jsonFactura);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -48,6 +52,7 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
         String jsonPago = pagoService.generarJSONPago(pago);
         try {
+            s3Service.uploadJson(jsonPago, "pago");
             String response = sqsService.sendMessage(jsonPago);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -63,6 +68,7 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
         String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
         try {
+            s3Service.uploadJson(jsonPagoFactura, "pago-factura");
             String response = sqsService.sendMessage(jsonPagoFactura);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -78,6 +84,7 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
         String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
         try {
+            s3Service.uploadJson(jsonNDebitoCredito, "nota");
             String response = sqsService.sendMessage(jsonNDebitoCredito);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
