@@ -41,7 +41,7 @@ public class FacturacionMasivaController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private String procesarJson(String jsonOriginal, String tipo, HttpServletRequest request) throws Exception {
+    private String procesarJson(String jsonOriginal, String tipo, HttpServletRequest request, String messageId) throws Exception {
         Map<String, Object> jsonData = objectMapper.readValue(jsonOriginal, new TypeReference<Map<String, Object>>() {});
 
         // Capturar headers
@@ -63,7 +63,7 @@ public class FacturacionMasivaController {
 
 
         // Subir a S3
-        s3Service.uploadJson(jsonFinalString, tipo, UUID.randomUUID().toString());
+        s3Service.uploadJson(jsonFinalString, tipo, messageId);
 
         // Enviar a SQS
         return sqsService.sendMessage(jsonDataString);
@@ -72,9 +72,10 @@ public class FacturacionMasivaController {
     @PostMapping("/factura")
     public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura, HttpServletRequest request) {
         try {
+            String messageId = UUID.randomUUID().toString();
             String jsonFactura = facturaService.generarJSONFactura(factura);
-            String response = procesarJson(jsonFactura, "factura", request);
-            return ResponseEntity.ok(response);
+            String response = procesarJson(jsonFactura, "factura", request, messageId);
+            return ResponseEntity.ok(messageId);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -83,9 +84,10 @@ public class FacturacionMasivaController {
     @PostMapping("/pago")
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago, HttpServletRequest request) {
         try {
+            String messageId = UUID.randomUUID().toString();
             String jsonPago = pagoService.generarJSONPago(pago);
-            String response = procesarJson(jsonPago, "pago", request);
-            return ResponseEntity.ok(response);
+            String response = procesarJson(jsonPago, "pago", request, messageId);
+            return ResponseEntity.ok(messageId);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar pago", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -95,9 +97,10 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura,
             HttpServletRequest request) {
         try {
+            String messageId = UUID.randomUUID().toString();
             String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
-            String response = procesarJson(jsonPagoFactura, "pago-factura", request);
-            return ResponseEntity.ok(response);
+            String response = procesarJson(jsonPagoFactura, "pago-factura", request, messageId);
+            return ResponseEntity.ok(messageId);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar pago-factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -107,9 +110,10 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito,
             HttpServletRequest request) {
         try {
+            String messageId = UUID.randomUUID().toString();
             String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
-            String response = procesarJson(jsonNDebitoCredito, "nota", request);
-            return ResponseEntity.ok(response);
+            String response = procesarJson(jsonNDebitoCredito, "nota", request, messageId);
+            return ResponseEntity.ok(messageId);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar nota", HttpStatus.INTERNAL_SERVER_ERROR);
         }
