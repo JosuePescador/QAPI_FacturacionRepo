@@ -3,11 +3,17 @@ package cc.nuvu.qapi.controller;
 import cc.nuvu.qapi.model.*;
 import cc.nuvu.qapi.service.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/facturacion-masiva")
@@ -31,67 +37,100 @@ public class FacturacionMasivaController {
     @Autowired
     private S3Service s3Service;
 
-    // Endpoint para generar JSON de Factura (objeto individual)
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    private String procesarJson(String jsonOriginal, String tipo, HttpServletRequest request) throws Exception {
+        Map<String, Object> jsonData = objectMapper.readValue(jsonOriginal, new TypeReference<Map<String, Object>>() {});
+
+        // Capturar headers
+        Map<String, String> headersMap = new LinkedHashMap<>();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            headersMap.put(headerName, request.getHeader(headerName));
+        }
+
+        // Crear nuevo JSON estructurado correctamente
+        Map<String, Object> jsonFinal = new LinkedHashMap<>();
+        jsonFinal.put("headers", headersMap); 
+        jsonFinal.put("body", jsonData);  
+
+        // Convertir a JSON
+        String jsonFinalString = objectMapper.writeValueAsString(jsonFinal);
+        String jsonDataString = objectMapper.writeValueAsString(jsonData);
+
+
+        // Subir a S3
+        s3Service.uploadJson(jsonFinalString, tipo);
+
+        // Enviar a SQS
+        return sqsService.sendMessage(jsonDataString);
+    }
+
     @PostMapping("/factura")
-    public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
-        String jsonFactura = facturaService.generarJSONFactura(factura);
+    public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura, HttpServletRequest request) {
         try {
+<<<<<<< HEAD
             String response = sqsService.sendMessage(jsonFactura);
             s3Service.uploadJson(jsonFactura, "factura", response);
+=======
+            String jsonFactura = facturaService.generarJSONFactura(factura);
+            String response = procesarJson(jsonFactura, "factura", request);
+>>>>>>> c2e1e2108c10020e6b35f7cd299710889372b7af
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            String message = "Ha ocurrido un error al enviar el mensaje de factura";
-            System.out.println(message);
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al procesar factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // Endpoint para generar JSON de Pago (objeto individual)
     @PostMapping("/pago")
-    public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
-        String jsonPago = pagoService.generarJSONPago(pago);
+    public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago, HttpServletRequest request) {
         try {
+<<<<<<< HEAD
             String response = sqsService.sendMessage(jsonPago);
             s3Service.uploadJson(jsonPago, "pago", response);
+=======
+            String jsonPago = pagoService.generarJSONPago(pago);
+            String response = procesarJson(jsonPago, "pago", request);
+>>>>>>> c2e1e2108c10020e6b35f7cd299710889372b7af
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            String message = "Ha ocurrido un error al enviar el mensaje de factura";
-            System.out.println(message);
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al procesar pago", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // Endpoint para generar JSON de Pago Factura (objeto individual)
     @PostMapping("/pago-factura")
-    public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
-        String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
+    public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura,
+            HttpServletRequest request) {
         try {
+<<<<<<< HEAD
             String response = sqsService.sendMessage(jsonPagoFactura);
             s3Service.uploadJson(jsonPagoFactura, "pago-factura", response);
+=======
+            String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
+            String response = procesarJson(jsonPagoFactura, "pago-factura", request);
+>>>>>>> c2e1e2108c10020e6b35f7cd299710889372b7af
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            String message = "Ha ocurrido un error al enviar el mensaje de factura";
-            System.out.println(message);
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al procesar pago-factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // Endpoint para generar JSON de Nota Débito/Crédito (objeto individual)
     @PostMapping("/nota")
-    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
-        String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
+    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito,
+            HttpServletRequest request) {
         try {
+<<<<<<< HEAD
             String response = sqsService.sendMessage(jsonNDebitoCredito);
             s3Service.uploadJson(jsonNDebitoCredito, "nota", response);
+=======
+            String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
+            String response = procesarJson(jsonNDebitoCredito, "nota", request);
+>>>>>>> c2e1e2108c10020e6b35f7cd299710889372b7af
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            String message = "Ha ocurrido un error al enviar el mensaje de factura";
-            System.out.println(message);
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al procesar nota", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
