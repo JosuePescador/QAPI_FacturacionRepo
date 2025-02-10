@@ -17,6 +17,7 @@ public class S3Service {
 
     private final S3Client s3Client;
     private final String bucketName = "uca-test-facturacionmasiva-auditory";
+    
 
     public S3Service() {
         this.s3Client = S3Client.builder()
@@ -35,11 +36,11 @@ public class S3Service {
             messageId = UUID.randomUUID().toString();
         }
 
-        String fileName = timestamp + "-" + messageId + tipo + ".json";
+        String fileName = timestamp + "-" + messageId + "-" +  tipo + ".json";
         // Ruta completa en S3
         String s3Key = "requests/" + fecha + "/" + fileName;
-
-        // Subir archivo a S3
+    
+        //Subir a S3
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(s3Key)
