@@ -10,12 +10,14 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Service
 public class S3Service {
 
     private final S3Client s3Client;
     private final String bucketName = "uca-test-facturacionmasiva-auditory";
+    
 
     public S3Service() {
         this.s3Client = S3Client.builder()
@@ -24,17 +26,28 @@ public class S3Service {
                 .build();
     }
 
-    public void uploadJson(String json, String tipo) {
-        // Obtener la fecha actual en formato YYYYMMDD
-        String fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        // Generar timestamp único en milisegundos
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        // Nombre del archivo en formato: YYYYMMDDHHMMSSSSS-tipo.json
-        String fileName = fecha + timestamp + "-" + tipo + ".json";
-        // Ruta completa en S3
-        String s3Key = "requests/" + fecha + "/" + fileName;
+    public void uploadJson(String json, String operacion, String messageId) {
 
-        // Subir archivo a S3
+        // Generar timestamp con formato AAAAMMDDHHMMSS
+        LocalDateTime now = LocalDateTime.now();
+        String timestamp = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+        // Si no se proporciona un ID de mensaje, generar un UUID
+        if (messageId == null || messageId.isEmpty()) {
+            messageId = UUID.randomUUID().toString();
+        }
+
+        // 3. convención AAAAMMDDHHMMSS-{uuid}-{operacion}.json
+        String fileName = String.format("%s-%s-%s.json", timestamp, messageId, operacion);
+
+        // prefijo requests/AAAA/MM/DD/
+        String s3Key = String.format("requests/%s/%s/%s/%s", 
+                                     now.getYear(), 
+                                     String.format("%02d", now.getMonthValue()), 
+                                     String.format("%02d", now.getDayOfMonth()), 
+                                     fileName);
+
+        //Subir a S3
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(s3Key)

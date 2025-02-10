@@ -36,8 +36,8 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura) {
         String jsonFactura = facturaService.generarJSONFactura(factura);
         try {
-            s3Service.uploadJson(jsonFactura, "factura");
             String response = sqsService.sendMessage(jsonFactura);
+            s3Service.uploadJson(jsonFactura, "factura", response);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             String message = "Ha ocurrido un error al enviar el mensaje de factura";
@@ -52,8 +52,8 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago) {
         String jsonPago = pagoService.generarJSONPago(pago);
         try {
-            s3Service.uploadJson(jsonPago, "pago");
             String response = sqsService.sendMessage(jsonPago);
+            s3Service.uploadJson(jsonPago, "pago", response);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             String message = "Ha ocurrido un error al enviar el mensaje de factura";
@@ -68,8 +68,8 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura) {
         String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
         try {
-            s3Service.uploadJson(jsonPagoFactura, "pago-factura");
             String response = sqsService.sendMessage(jsonPagoFactura);
+            s3Service.uploadJson(jsonPagoFactura, "pago-factura", response);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             String message = "Ha ocurrido un error al enviar el mensaje de factura";
@@ -84,8 +84,8 @@ public class FacturacionMasivaController {
     public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito) {
         String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
         try {
-            s3Service.uploadJson(jsonNDebitoCredito, "nota");
             String response = sqsService.sendMessage(jsonNDebitoCredito);
+            s3Service.uploadJson(jsonNDebitoCredito, "nota", response);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             String message = "Ha ocurrido un error al enviar el mensaje de factura";
