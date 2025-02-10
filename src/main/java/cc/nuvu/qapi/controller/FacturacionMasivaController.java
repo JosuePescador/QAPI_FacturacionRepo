@@ -75,7 +75,7 @@ public class FacturacionMasivaController {
             String messageId = UUID.randomUUID().toString();
             String jsonFactura = facturaService.generarJSONFactura(factura);
             String response = procesarJson(jsonFactura, "factura", request, messageId);
-            return ResponseEntity.ok(messageId);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -87,7 +87,7 @@ public class FacturacionMasivaController {
             String messageId = UUID.randomUUID().toString();
             String jsonPago = pagoService.generarJSONPago(pago);
             String response = procesarJson(jsonPago, "pago", request, messageId);
-            return ResponseEntity.ok(messageId);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar pago", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -100,7 +100,7 @@ public class FacturacionMasivaController {
             String messageId = UUID.randomUUID().toString();
             String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
             String response = procesarJson(jsonPagoFactura, "pago-factura", request, messageId);
-            return ResponseEntity.ok(messageId);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar pago-factura", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -113,7 +113,7 @@ public class FacturacionMasivaController {
             String messageId = UUID.randomUUID().toString();
             String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
             String response = procesarJson(jsonNDebitoCredito, "nota", request, messageId);
-            return ResponseEntity.ok(messageId);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al procesar nota", HttpStatus.INTERNAL_SERVER_ERROR);
         }
