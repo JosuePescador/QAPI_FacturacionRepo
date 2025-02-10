@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/facturacion-masiva")
@@ -62,7 +63,7 @@ public class FacturacionMasivaController {
 
 
         // Subir a S3
-        s3Service.uploadJson(jsonFinalString, tipo);
+        s3Service.uploadJson(jsonFinalString, tipo, UUID.randomUUID().toString());
 
         // Enviar a SQS
         return sqsService.sendMessage(jsonDataString);

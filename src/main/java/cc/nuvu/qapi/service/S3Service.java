@@ -8,7 +8,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Service
 public class S3Service {
@@ -18,18 +20,22 @@ public class S3Service {
 
     public S3Service() {
         this.s3Client = S3Client.builder()
-                .region(Region.US_EAST_1) // Cambia según la región de tu bucket
+                .region(Region.US_EAST_1)
                 .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
     }
 
-    public void uploadJson(String json, String tipo) {
-        // Obtener la fecha actual en formato YYYYMMDD
+    public void uploadJson(String json, String tipo, String messageId) {
+
         String fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        // Generar timestamp único en milisegundos
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        // Nombre del archivo en formato: YYYYMMDDHHMMSSSSS-tipo.json
-        String fileName = fecha + timestamp + "-" + tipo + ".json";
+        LocalDateTime now = LocalDateTime.now();
+        String timestamp = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+        if (messageId == null || messageId.isEmpty()) {
+            messageId = UUID.randomUUID().toString();
+        }
+
+        String fileName = timestamp + "-" + messageId + tipo + ".json";
         // Ruta completa en S3
         String s3Key = "requests/" + fecha + "/" + fileName;
 
