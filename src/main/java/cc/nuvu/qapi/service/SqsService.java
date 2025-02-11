@@ -33,7 +33,7 @@ public class SqsService {
         // Enviar el mensaje
         SendMessageResponse response = sqsClient.sendMessage(sendMessageRequest);
 
-        return "Mensaje enviado con éxito. ID del mensaje: " + response.messageId();
+        return response.messageId();
 
     }
 }

@@ -17,7 +17,6 @@ public class S3Service {
 
     private final S3Client s3Client;
     private final String bucketName = "uca-test-facturacionmasiva-auditory";
-    
 
     public S3Service() {
         this.s3Client = S3Client.builder()
@@ -32,15 +31,11 @@ public class S3Service {
         LocalDateTime now = LocalDateTime.now();
         String timestamp = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
-        if (messageId == null || messageId.isEmpty()) {
-            messageId = UUID.randomUUID().toString();
-        }
-
-        String fileName = timestamp + "-" + messageId + "-" +  tipo + ".json";
-        // Ruta completa en S3
+        // El ID ya viene de SQS, aseguramos que es el correcto
+        String fileName = timestamp + "-" + messageId + "-" + tipo + ".json";
         String s3Key = "requests/" + fecha + "/" + fileName;
-    
-        //Subir a S3
+
+        // Subir a S3
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(s3Key)
