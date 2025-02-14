@@ -40,7 +40,7 @@ public class FacturacionMasivaController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private String procesarJson(String jsonOriginal, String tipo, HttpServletRequest request)
+    private Map<String, String> procesarJson(String jsonOriginal, String tipo, HttpServletRequest request)
             throws Exception {
         Map<String, Object> jsonData = objectMapper.readValue(jsonOriginal, new TypeReference<Map<String, Object>>() {
         });
@@ -67,53 +67,63 @@ public class FacturacionMasivaController {
 
         // Asegurar que el archivo en S3 use el mismo ID del mensaje en SQS
         s3Service.uploadJson(jsonFinalString, tipo, sqsMessageId);
+        // Devolver respuesta en formato JSON
+        Map<String, String> response = new LinkedHashMap<>();
+        response.put("mensaje", "Mensaje enviado con éxito");
+        response.put("idMensaje", sqsMessageId);
 
-        return "Mensaje enviado con éxito. ID del mensaje: " + sqsMessageId;
+        return response;
     }
 
     @PostMapping("/factura")
-    public ResponseEntity<String> generarJsonFactura(@RequestBody FacturaRequest factura, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> generarJsonFactura(@RequestBody FacturaRequest factura,
+            HttpServletRequest request) {
         try {
             String jsonFactura = facturaService.generarJSONFactura(factura);
-            String response = procesarJson(jsonFactura, "factura", request);
+            Map<String, String> response = procesarJson(jsonFactura, "factura", request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al procesar factura", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error al procesar factura"));
         }
     }
 
     @PostMapping("/pago")
-    public ResponseEntity<String> generarJsonPago(@RequestBody PagoRequest pago, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> generarJsonPago(@RequestBody PagoRequest pago,
+            HttpServletRequest request) {
         try {
             String jsonPago = pagoService.generarJSONPago(pago);
-            String response = procesarJson(jsonPago, "pago", request);
+            Map<String, String> response = procesarJson(jsonPago, "pago", request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al procesar pago", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error al procesar pago"));
         }
     }
 
     @PostMapping("/pago-factura")
-    public ResponseEntity<String> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura,
+    public ResponseEntity<Map<String, String>> generarJsonPagoFactura(@RequestBody PagoFacturaRequest pagoFactura,
             HttpServletRequest request) {
         try {
             String jsonPagoFactura = pagoFacturaService.generarJSONPagoFactura(pagoFactura);
-            String response = procesarJson(jsonPagoFactura, "pago-factura", request);
+            Map<String, String> response = procesarJson(jsonPagoFactura, "pago-factura", request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al procesar pago-factura", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error al procesar pago-factura"));
         }
     }
 
     @PostMapping("/nota")
-    public ResponseEntity<String> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito,
+    public ResponseEntity<Map<String, String>> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito,
             HttpServletRequest request) {
         try {
             String jsonNDebitoCredito = nDebitoCreditoService.generarJSONNDebito(notaDebitoCredito);
-            String response = procesarJson(jsonNDebitoCredito, "nota", request);
+            Map<String, String> response = procesarJson(jsonNDebitoCredito, "nota", request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al procesar nota", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error al procesar pago-factura"));
         }
     }
 }
