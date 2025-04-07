@@ -1,40 +1,37 @@
 package cc.nuvu.qapi.security;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.security.Keys;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import cc.nuvu.qapi.service.SecretService;
-
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.PublicKey;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.util.Base64;
 import java.util.Collections;
-
-import javax.crypto.SecretKey;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final SecretService secretService;
-
-    public JwtAuthenticationFilter(SecretService secretService) {
-        this.secretService = secretService;
+    public JwtAuthenticationFilter() {
     }
 
     @Override
@@ -48,50 +45,82 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String authorizationHeader = request.getHeader("Authorization");
-
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token missing or malformed");
             return;
         }
-
         String token = authorizationHeader.substring(7);
+
         try {
-            String secret = secretService.getSecret();
-            SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+            // 1. Extract the JWT header and decode it to get the 'kid'
+            String[] tokenParts = token.split("\\.");
+            if (tokenParts.length < 2) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token format");
+                return;
+            }
+            String headerJson = new String(Base64.getUrlDecoder().decode(tokenParts[0]));
+            JsonNode headerNode = new ObjectMapper().readTree(headerJson);
+            String kid = headerNode.get("kid").asText();
 
-            Claims claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
+            // 2. Download the JWK set from the provided URL
+            URL jwkUrl = new URL("https://iam.ia.ucaldas.nuvu.cc/realms/factMasivaTest/protocol/openid-connect/certs");
+            HttpURLConnection connection = (HttpURLConnection) jwkUrl.openConnection();
+            connection.setRequestMethod("GET");
+            InputStream is = connection.getInputStream();
+            JsonNode jwks = new ObjectMapper().readTree(is);
+            is.close();
 
-            // Validar `exp` y `nbf`
-            long now = System.currentTimeMillis() / 1000;
-            if (claims.getExpiration().getTime() / 1000 < now) {
+            // 3. Find the matching key using the 'kid'
+            Optional<JsonNode> keyNodeOpt = StreamSupport.stream(jwks.get("keys").spliterator(), false)
+                    .filter(node -> node.get("kid").asText().equals(kid))
+                    .findFirst();
+
+            if (!keyNodeOpt.isPresent()) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token kid");
+                return;
+            }
+            JsonNode keyNode = keyNodeOpt.get();
+
+            // 4. Extract the certificate from the 'x5c' field and convert it to a PublicKey
+            String certString = keyNode.get("x5c").get(0).asText();
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            ByteArrayInputStream certStream = new ByteArrayInputStream(Base64.getDecoder().decode(certString));
+            X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(certStream);
+            PublicKey publicKey = certificate.getPublicKey();
+
+            // 5. Build the JWT parser with the public key using the non-deprecated method
+            JwtParser jwtParser = Jwts.parser()
+                    .verifyWith(publicKey)
+                    .build();
+
+            // Validate the token signature and parse the claims
+            Claims claims = jwtParser.parseClaimsJws(token).getBody();
+
+            // Optionally check exp and nbf
+            long now = System.currentTimeMillis();
+            if (claims.getExpiration() != null && claims.getExpiration().getTime() < now) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token expired");
                 return;
             }
-            if (claims.getNotBefore() != null && claims.getNotBefore().getTime() / 1000 > now) {
+            if (claims.getNotBefore() != null && claims.getNotBefore().getTime() > now) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token not valid yet");
                 return;
             }
 
-            UserDetails userDetails = new User("facturacion_masiva_api", "", Collections.emptyList());
+            // Create an Authentication object.
+            // You can extract roles from claims if available. Here, for simplicity, we assign a default role.
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
+                            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
-
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+            // Set the authentication in the security context
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            chain.doFilter(request, response);
 
-        } catch (ExpiredJwtException e) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token expired");
-        } catch (UnsupportedJwtException | MalformedJwtException e) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+            // Continue with the filter chain
+            chain.doFilter(request, response);
         } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal error");
+            System.out.println("Request - " + request.getRemoteAddr().toString() + " rejected.");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
         }
     }
 }

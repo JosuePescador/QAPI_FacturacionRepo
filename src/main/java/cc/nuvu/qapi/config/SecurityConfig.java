@@ -30,19 +30,18 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/status", "/error").permitAll()
-                .anyRequest().authenticated());
-    
+                .requestMatchers("/", "/status", "/facturacion-masiva/**").permitAll() // se agregó /error
+                .anyRequest().authenticated()
+            )
+            .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
-    // Este bean deshabilita la configuración automática del UserDetailsService
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            throw new UsernameNotFoundException(
-                "No user found");
+            throw new UsernameNotFoundException("No user found");
         };
     }
 }
-
