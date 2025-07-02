@@ -4,19 +4,23 @@ package cc.nuvu.qapi.model;
 public class FacturaRequest {
     private String referencia;
     private String cicloLectivo;
+    //TODO Crear Logica para usar 5 y 11 en movimiento
+    private String movimiento;
     private Integer auxiliar;
     private String observacion;
     private String dependencia;
-    private String cuentaConsignacion;
+
+    // Conceptos Principales
     private String conceptoFacturacion;
+    private String cantidadUnidades;
     private Integer valorUnitario;
-    private Integer conceptoAdicionales;
+
+    // Tercero
     private String claseIdentificacion;
     private Integer numeroIdentificacion;
     private Integer documentoAlterno;
     private String descripcionAuxiliar;
     private String naturalJuridica;
-    private String tipoAuxiliar;
     private String tipoRetencion;
     private String centroCostosAsociado;
     private Integer pais;
@@ -39,6 +43,12 @@ public class FacturaRequest {
     public void setCicloLectivo(String cicloLectivo) {
         this.cicloLectivo = cicloLectivo;
     }
+    public String getMovimiento() {
+        return movimiento;
+    }
+    public void setMovimiento(String movimiento) {
+        this.movimiento = movimiento;
+    }
     public Integer getAuxiliar() {
         return auxiliar;
     }
@@ -57,29 +67,23 @@ public class FacturaRequest {
     public void setDependencia(String dependencia) {
         this.dependencia = dependencia;
     }
-    public String getCuentaConsignacion() {
-        return cuentaConsignacion;
-    }
-    public void setCuentaConsignacion(String cuentaConsignacion) {
-        this.cuentaConsignacion = cuentaConsignacion;
-    }
     public String getConceptoFacturacion() {
         return conceptoFacturacion;
     }
     public void setConceptoFacturacion(String conceptoFacturacion) {
         this.conceptoFacturacion = conceptoFacturacion;
     }
+        public String getCantidadUnidades() {
+        return cantidadUnidades;
+    }
+    public void setCantidadUnidades(String cantidadUnidades) {
+        this.cantidadUnidades = cantidadUnidades;
+    }
     public Integer getValorUnitario() {
         return valorUnitario;
     }
     public void setValorUnitario(Integer valorUnitario) {
         this.valorUnitario = valorUnitario;
-    }
-    public Integer getConceptoAdicionales() {
-        return conceptoAdicionales;
-    }
-    public void setConceptoAdicionales(Integer conceptoAdicionales) {
-        this.conceptoAdicionales = conceptoAdicionales;
     }
     public String getClaseIdentificacion() {
         return claseIdentificacion;
@@ -110,12 +114,6 @@ public class FacturaRequest {
     }
     public void setNaturalJuridica(String naturalJuridica) {
         this.naturalJuridica = naturalJuridica;
-    }
-    public String getTipoAuxiliar() {
-        return tipoAuxiliar;
-    }
-    public void setTipoAuxiliar(String tipoAuxiliar) {
-        this.tipoAuxiliar = tipoAuxiliar;
     }
     public String getTipoRetencion() {
         return tipoRetencion;

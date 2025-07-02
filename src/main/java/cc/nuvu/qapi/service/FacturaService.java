@@ -29,13 +29,15 @@ public class FacturaService {
             // Agregar los campos al mapa
             dataMap.put("referencia", facturaRequest.getReferencia());
             dataMap.put("cicloLectivo", facturaRequest.getCicloLectivo());
+            dataMap.put("movimiento", facturaRequest.getMovimiento());
             dataMap.put("auxiliar", facturaRequest.getAuxiliar());
             dataMap.put("observacion", facturaRequest.getObservacion());
             dataMap.put("dependencia", facturaRequest.getDependencia());
-            dataMap.put("cuentaConsignacion", facturaRequest.getCuentaConsignacion());
+
+            // Conceptos Principales
             dataMap.put("conceptoFacturacion", facturaRequest.getConceptoFacturacion());
+            dataMap.put("cantidadUnidades",facturaRequest.getCantidadUnidades());
             dataMap.put("valorUnitario", facturaRequest.getValorUnitario());
-            dataMap.put("conceptoAdicionales", facturaRequest.getConceptoAdicionales());
 
             // Terceros
             dataMap.put("claseIdentificacion", facturaRequest.getClaseIdentificacion());
@@ -43,7 +45,6 @@ public class FacturaService {
             dataMap.put("documentoAlterno", facturaRequest.getDocumentoAlterno());
             dataMap.put("descripcionAuxiliar", facturaRequest.getDescripcionAuxiliar());
             dataMap.put("naturalJuridica", facturaRequest.getNaturalJuridica());
-            dataMap.put("tipoAuxiliar", facturaRequest.getTipoAuxiliar());
             dataMap.put("tipoRetencion", facturaRequest.getTipoRetencion());
             dataMap.put("centroCostosAsociado", facturaRequest.getCentroCostosAsociado());
             dataMap.put("pais", facturaRequest.getPais());
