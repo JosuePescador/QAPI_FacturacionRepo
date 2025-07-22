@@ -34,7 +34,7 @@ phases:
       - export PATH=$M2_HOME'/bin:'$PATH
       - java -version
       - mvn -DskipTests package
-      - mv ./target/QAPI_FacturacionMasiva-1.0.9.jar ./target/QAPI_FacturacionMasiva.jar
+      - mv ./target/QAPI_FacturacionMasiva-1.1.0.jar ./target/QAPI_FacturacionMasiva.jar
       - ls
       - echo Generando Imagen de docker
       - docker build -t $ECR_REPOSITORY_URI:$VERSION .

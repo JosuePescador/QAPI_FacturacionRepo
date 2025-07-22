@@ -6,7 +6,7 @@ public class FacturaRequest {
     private String cicloLectivo;
     //TODO Crear Logica para usar 5 y 11 en movimiento
     private Integer movimiento;
-    private Integer auxiliar;
+    private Long auxiliar;
     private String observacion;
     private String dependencia;
 
@@ -17,8 +17,8 @@ public class FacturaRequest {
 
     // Tercero
     private String claseIdentificacion;
-    private Integer numeroIdentificacion;
-    private Integer documentoAlterno;
+    private Long numeroIdentificacion;
+    private Long documentoAlterno;
     private String descripcionAuxiliar;
     private String naturalJuridica;
     private String tipoRetencion;
@@ -49,10 +49,10 @@ public class FacturaRequest {
     public void setMovimiento(Integer movimiento) {
         this.movimiento = movimiento;
     }
-    public Integer getAuxiliar() {
+    public Long getAuxiliar() {
         return auxiliar;
     }
-    public void setAuxiliar(Integer auxiliar) {
+    public void setAuxiliar(Long auxiliar) {
         this.auxiliar = auxiliar;
     }
     public String getObservacion() {
@@ -91,16 +91,16 @@ public class FacturaRequest {
     public void setClaseIdentificacion(String claseIdentificacion) {
         this.claseIdentificacion = claseIdentificacion;
     }
-    public Integer getNumeroIdentificacion() {
+    public Long getNumeroIdentificacion() {
         return numeroIdentificacion;
     }
-    public void setNumeroIdentificacion(Integer numeroIdentificacion) {
+    public void setNumeroIdentificacion(Long numeroIdentificacion) {
         this.numeroIdentificacion = numeroIdentificacion;
     }
-    public Integer getDocumentoAlterno() {
+    public Long getDocumentoAlterno() {
         return documentoAlterno;
     }
-    public void setDocumentoAlterno(Integer documentoAlterno) {
+    public void setDocumentoAlterno(Long documentoAlterno) {
         this.documentoAlterno = documentoAlterno;
     }
     public String getDescripcionAuxiliar() {

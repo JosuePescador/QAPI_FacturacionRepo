@@ -12,7 +12,7 @@
 			<arg value="mvn -DskipTests package" />
 		</exec>
 		
-		<copy file="target/QAPI_FacturacionMasiva-1.0.9.jar" tofile="dist/QAPI_FacturacionMasiva.jar"></copy>
+		<copy file="target/QAPI_FacturacionMasiva-1.1.0.jar" tofile="dist/QAPI_FacturacionMasiva.jar"></copy>
 
 	</target>
 
