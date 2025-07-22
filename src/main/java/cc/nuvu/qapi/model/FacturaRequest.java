@@ -5,14 +5,14 @@ public class FacturaRequest {
     private String referencia;
     private String cicloLectivo;
     //TODO Crear Logica para usar 5 y 11 en movimiento
-    private String movimiento;
+    private Integer movimiento;
     private Integer auxiliar;
     private String observacion;
     private String dependencia;
 
     // Conceptos Principales
     private String conceptoFacturacion;
-    private String cantidadUnidades;
+    private Integer cantidadUnidades;
     private Integer valorUnitario;
 
     // Tercero
@@ -43,10 +43,10 @@ public class FacturaRequest {
     public void setCicloLectivo(String cicloLectivo) {
         this.cicloLectivo = cicloLectivo;
     }
-    public String getMovimiento() {
+    public Integer getMovimiento() {
         return movimiento;
     }
-    public void setMovimiento(String movimiento) {
+    public void setMovimiento(Integer movimiento) {
         this.movimiento = movimiento;
     }
     public Integer getAuxiliar() {
@@ -73,10 +73,10 @@ public class FacturaRequest {
     public void setConceptoFacturacion(String conceptoFacturacion) {
         this.conceptoFacturacion = conceptoFacturacion;
     }
-        public String getCantidadUnidades() {
+        public Integer getCantidadUnidades() {
         return cantidadUnidades;
     }
-    public void setCantidadUnidades(String cantidadUnidades) {
+    public void setCantidadUnidades(Integer cantidadUnidades) {
         this.cantidadUnidades = cantidadUnidades;
     }
     public Integer getValorUnitario() {
