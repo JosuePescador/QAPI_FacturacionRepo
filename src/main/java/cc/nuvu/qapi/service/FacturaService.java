@@ -45,6 +45,7 @@ public class FacturaService {
             dataMap.put("documentoAlterno", facturaRequest.getDocumentoAlterno());
             dataMap.put("descripcionAuxiliar", facturaRequest.getDescripcionAuxiliar());
             dataMap.put("naturalJuridica", facturaRequest.getNaturalJuridica());
+            dataMap.put("tipoAuxiliar", facturaRequest.getTipoAuxiliar());
             dataMap.put("tipoRetencion", facturaRequest.getTipoRetencion());
             dataMap.put("centroCostosAsociado", facturaRequest.getCentroCostosAsociado());
             dataMap.put("pais", facturaRequest.getPais());

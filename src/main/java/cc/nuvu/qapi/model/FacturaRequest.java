@@ -21,6 +21,7 @@ public class FacturaRequest {
     private Long documentoAlterno;
     private String descripcionAuxiliar;
     private String naturalJuridica;
+    private String tipoAuxiliar;
     private String tipoRetencion;
     private String centroCostosAsociado;
     private Integer pais;
@@ -114,6 +115,12 @@ public class FacturaRequest {
     }
     public void setNaturalJuridica(String naturalJuridica) {
         this.naturalJuridica = naturalJuridica;
+    }
+        public String getTipoAuxiliar() {
+        return tipoAuxiliar;
+    }
+    public void setTipoAuxiliar(String tipoAuxiliar) {
+        this.tipoAuxiliar = tipoAuxiliar;
     }
     public String getTipoRetencion() {
         return tipoRetencion;
