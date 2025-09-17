@@ -4,11 +4,11 @@ package cc.nuvu.qapi.model;
 public class FacturaRequest {
     private String referencia;
     private String cicloLectivo;
-    //TODO Crear Logica para usar 5 y 11 en movimiento
     private Integer movimiento;
     private Long auxiliar;
     private String observacion;
     private String dependencia;
+    private Long cuentaConsignacion;
 
     // Conceptos Principales
     private String conceptoFacturacion;
@@ -67,6 +67,12 @@ public class FacturaRequest {
     }
     public void setDependencia(String dependencia) {
         this.dependencia = dependencia;
+    }
+        public Long getCuentaConsignacion() {
+        return cuentaConsignacion;
+    }
+    public void setcuentaConsignacion(Long cuentaConsignacion) {
+        this.cuentaConsignacion = cuentaConsignacion;
     }
     public String getConceptoFacturacion() {
         return conceptoFacturacion;
