@@ -4,24 +4,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class FacturaRequest {
+public class NotaDebitoRequest {
 
-    @JsonProperty("facturas")
-    private List<Factura> facturas;
+    @JsonProperty("notasdebito")
+    private List<NotaDebito> notasdebito;
 
-    public List<Factura> getFacturas() {
-        return facturas;
+    public List<NotaDebito> getNotasDebito() {
+        return notasdebito;
     }
 
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
+    public void setNotasDebito(List<NotaDebito> notasdebito) {
+        this.notasdebito = notasdebito;
     }
 
-    public static class Factura {
+    public static class NotaDebito {
         private String referencia;
 
         @JsonProperty("cicloLectivo")
-        private String cicloElectivo;
+        private String cicloLectivo;
 
         @JsonProperty("nit_tercero")
         private Long nitTercero;
@@ -42,12 +42,12 @@ public class FacturaRequest {
             this.referencia = referencia;
         }
 
-        public String getCicloElectivo() {
-            return cicloElectivo;
+        public String getCicloLectivo() {
+            return cicloLectivo;
         }
 
-        public void setCicloElectivo(String cicloElectivo) {
-            this.cicloElectivo = cicloElectivo;
+        public void setCicloLectivo(String cicloLectivo) {
+            this.cicloLectivo = cicloLectivo;
         }
 
         public Long getNitTercero() {

@@ -32,6 +32,9 @@ public class FacturacionMasivaController {
     private NotaService nDebitoCreditoService;
 
     @Autowired
+    private NotaDebitoService notaDebitoService;
+
+    @Autowired
     private SqsService sqsService;
 
     @Autowired
@@ -113,6 +116,20 @@ public class FacturacionMasivaController {
                     .body(Map.of("error", "Error al procesar pago-factura"));
         }
     }
+
+        @PostMapping("/nota-debito")
+    public ResponseEntity<Map<String, String>> generarJsonNotaDebito(@RequestBody NotaDebitoRequest notaDebito,
+            HttpServletRequest request) {
+        try {
+            String jsonNotaDebito = notaDebitoService.generarJSONNotaDebito(notaDebito);
+            Map<String, String> response = procesarJson(jsonNotaDebito, "nota-debito", request);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error al procesar nota-debito"));
+        }
+    }
+
 
     @PostMapping("/nota")
     public ResponseEntity<Map<String, String>> generarJsonNDebitoCredito(@RequestBody NotaRequest notaDebitoCredito,
