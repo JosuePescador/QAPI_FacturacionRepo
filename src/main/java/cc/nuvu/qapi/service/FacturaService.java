@@ -5,63 +5,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
 public class FacturaService {
 
     /**
-     * Genera un JSON con los campos proporcionados por el cliente y añade la categoría FACTURA.
+     * Genera un JSON con la categoría FACTURA y un arreglo de facturas en data.facturas.
      *
-     * @param facturaRequest Datos de la factura proporcionados por el cliente.
+     * @param facturaRequest Datos de las facturas proporcionados por el cliente.
      * @return String con el JSON generado.
      */
     public String generarJSONFactura(FacturaRequest facturaRequest) {
         if (facturaRequest == null) {
             throw new IllegalArgumentException("FacturaRequest no puede ser nulo");
         }
+        if (facturaRequest.getFacturas() == null || facturaRequest.getFacturas().isEmpty()) {
+            throw new IllegalArgumentException("Debe enviar al menos una factura en 'facturas'");
+        }
 
         try {
-            // Crear el mapa para los datos
             Map<String, Object> jsonMap = new HashMap<>();
             Map<String, Object> dataMap = new HashMap<>();
 
-            // Agregar los campos al mapa
-            dataMap.put("referencia", facturaRequest.getReferencia());
-            dataMap.put("cicloLectivo", facturaRequest.getCicloLectivo());
-            dataMap.put("auxiliar", facturaRequest.getAuxiliar());
-            dataMap.put("cuentaConsignacion", facturaRequest.getCuentaConsignacion());
+            // Estructura solicitada: { service: "FACTURA", data: { facturas: [ ... ] } }
+            dataMap.put("facturas", facturaRequest.getFacturas());
 
-            // Conceptos Principales
-            List<Map<String, Object>> conceptos = facturaRequest.getConceptosPrincipales();
-            dataMap.put("conceptosPrincipales", conceptos); // Aquí agregamos la lista de conceptos directamente
-
-            // Terceros
-            dataMap.put("claseIdentificacion", facturaRequest.getClaseIdentificacion());
-            dataMap.put("numeroIdentificacion", facturaRequest.getNumeroIdentificacion());
-            dataMap.put("descripcionAuxiliar", facturaRequest.getDescripcionAuxiliar());
-            dataMap.put("naturalJuridica", facturaRequest.getNaturalJuridica());
-            dataMap.put("tipoAuxiliar", facturaRequest.getTipoAuxiliar());
-            dataMap.put("tipoRetencion", facturaRequest.getTipoRetencion());
-            dataMap.put("pais", facturaRequest.getPais());
-            dataMap.put("departamento", facturaRequest.getDepartamento());
-            dataMap.put("ciudad", facturaRequest.getCiudad());
-            dataMap.put("celular", facturaRequest.getCelular());
-            dataMap.put("telefono", facturaRequest.getTelefono());
-            dataMap.put("direccion", facturaRequest.getDireccion());
-            dataMap.put("correoElectronico", facturaRequest.getCorreoElectronico());
-
-            // Agregar la categoría
             jsonMap.put("service", "FACTURA");
             jsonMap.put("data", dataMap);
 
-            // Convertir a JSON
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(jsonMap);
 
         } catch (Exception e) {
-            throw new RuntimeException("Error generando el JSON de la factura", e);
+            throw new RuntimeException("Error generando el JSON de la(s) factura(s)", e);
         }
     }
 }
