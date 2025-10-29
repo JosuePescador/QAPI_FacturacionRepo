@@ -1,7 +1,9 @@
 package cc.nuvu.qapi.service;
 
-import cc.nuvu.qapi.model.FacturaRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cc.nuvu.qapi.dto.FacturaRequest;
+
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

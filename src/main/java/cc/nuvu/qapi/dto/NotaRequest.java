@@ -1,4 +1,4 @@
-package cc.nuvu.qapi.model;
+package cc.nuvu.qapi.dto;
 
 public class NotaRequest {
     private Integer secuencia;

@@ -1,47 +1,87 @@
 package cc.nuvu.qapi.config;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import cc.nuvu.qapi.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
+    @Value("${spring.profiles.active:default}")
+    private String profile;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        if (profile.equals("dev")) {
+
+            http
+                    .csrf(CsrfConfigurer::disable)
+                    .cors(t -> {
+                        t.configurationSource(request -> {
+                            var cors = new org.springframework.web.cors.CorsConfiguration();
+                            cors.setAllowedOriginPatterns(List.of("*"));
+                            cors.setAllowedMethods(List.of("*"));
+                            cors.setAllowedHeaders(List.of("*"));
+                            return cors;
+                        });
+                    })
+                    .authorizeHttpRequests(
+                            expressionInterceptUrlRegistry -> expressionInterceptUrlRegistry
+                                    .requestMatchers("/**").permitAll()
+                                    .anyRequest()
+                                    .authenticated())
+                    .oauth2ResourceServer(
+                            oauth -> {
+                                oauth.jwt(jwt -> {});
+                            })
+                    .sessionManagement(session -> session
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+            return http.build();
+        }
+
         http
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/status", "/facturacion-masiva/**").permitAll() // se agregó /error
-                .anyRequest().authenticated()
-            )
-            .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(CsrfConfigurer::disable)
+                .cors(t -> {
+                    t.configurationSource(request -> {
+                        var cors = new org.springframework.web.cors.CorsConfiguration();
+                        cors.setAllowedOriginPatterns(List.of("*"));
+                        cors.setAllowedMethods(List.of("*"));
+                        cors.setAllowedHeaders(List.of("*"));
+                        return cors;
+                    });
+                })
+                .authorizeHttpRequests(
+                        expressionInterceptUrlRegistry -> expressionInterceptUrlRegistry
+                                .requestMatchers("/iam/**").permitAll()
+                                .requestMatchers("/helpCheck/**").permitAll()
+                                .requestMatchers("/version/**").permitAll()
+                                .requestMatchers("/ui/**").permitAll()
+                                .requestMatchers(
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/v3/api-docs/**",
+                                        "/api-docs/**",
+                                        "/webjars/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .oauth2ResourceServer(
+                        oauth -> {
+                            oauth.jwt(jwt -> {});
+                        })
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            throw new UsernameNotFoundException("No user found");
-        };
     }
 }

@@ -1,7 +1,9 @@
 package cc.nuvu.qapi.service;
 
-import cc.nuvu.qapi.model.NotaRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cc.nuvu.qapi.dto.NotaRequest;
+
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

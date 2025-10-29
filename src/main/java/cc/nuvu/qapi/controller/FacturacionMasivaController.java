@@ -1,5 +1,9 @@
 package cc.nuvu.qapi.controller;
 
+import cc.nuvu.qapi.dto.FacturaRequest;
+import cc.nuvu.qapi.dto.NotaRequest;
+import cc.nuvu.qapi.dto.PagoFacturaRequest;
+import cc.nuvu.qapi.dto.PagoRequest;
 import cc.nuvu.qapi.model.*;
 import cc.nuvu.qapi.service.*;
 
