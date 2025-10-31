@@ -1,4 +1,4 @@
-package cc.nuvu.qapi.controller;
+package cc.nuvu.qapi.presentation.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
