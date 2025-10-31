@@ -15,9 +15,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @Configuration
 public class SwaggerConfig {
 
-    @Value("${spring.profiles.active:default}")
-    private String profile;
-
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private String realmUrl;
 
