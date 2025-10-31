@@ -5,6 +5,8 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -14,8 +16,10 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class S3Service {
 
-    private final S3Client s3Client;
-    private final String bucketName = "uca-test-facturacionmasiva-auditory";
+    private S3Client s3Client;
+
+    @Value("${aws.s3.bucketname}")
+    private String bucketName;
 
     public S3Service() {
         this.s3Client = S3Client.builder()
