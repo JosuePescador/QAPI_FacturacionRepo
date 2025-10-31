@@ -1,17 +1,24 @@
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-            issuer-uri: https://iam.ia.ucaldas.nuvu.cc/realms/factMasivaTest
-
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: https://iam.ia.ucaldas.nuvu.cc/realms/factMasivaTest
+    cloud:
+        aws:
+            region:
+                static: us-east-1
+    # Las credenciales deben ser setteadas en la consola!
 
 aws:
     sqs:
         fifo:
             queue:
                 url: "https://sqs.us-east-1.amazonaws.com/225711149285/uca-test-factmasiva-sqs.fifo"
-
+                name: "uca-test-factmasiva-sqs.fifo"
+    s3:
+        bucketname: "uca-test-facturacionmasiva-auditory"
+        
 springdoc:
     api-docs:
         path: /api-docs
