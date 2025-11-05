@@ -27,8 +27,6 @@ public class FacturacionMasivaController {
     public ResponseEntity<Map<String, String>> generarJsonNotaDebito(@Valid @RequestBody NotaDebitoRequest notaDebito,
             HttpServletRequest request) {
                 var info = procesarRequestService.recibirYProcesarRequest(notaDebito);
-                System.out.println(notaDebito.toString());
-                System.out.println(info);
                 return null;
     }
 }
