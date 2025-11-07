@@ -19,7 +19,7 @@ aws:
         fifo:
             queue:
                 # url: "https://sqs.us-east-1.amazonaws.com/225711149285/uca-test-factmasiva-sqs.fifo"
-                url: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/uca-test-factmasiva-sqs.fifo"
+                # url: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/uca-test-factmasiva-sqs.fifo"
                 name: "uca-test-factmasiva-sqs.fifo"
     s3:
         bucketname: "uca-test-facturacionmasiva-auditory"

@@ -7,7 +7,6 @@ import lombok.Setter;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
-
 @DynamoDbBean
 @Getter
 @Setter
@@ -16,14 +15,16 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 public class InfoRequest {
 
     private String id;
-    private String idMensaje;
+    // private String idMensaje;
     private String tipoServicio;
     private String estado;
+    private Integer cantidad; 
+    private String fechaRegistro;
     private String request;
 
     @DynamoDbPartitionKey
     public String getId() {
         return id;
     }
-    
+
 }

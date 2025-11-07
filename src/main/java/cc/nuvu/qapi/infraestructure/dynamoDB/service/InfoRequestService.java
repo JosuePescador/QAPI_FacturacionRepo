@@ -1,5 +1,7 @@
 package cc.nuvu.qapi.infraestructure.dynamoDB.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -30,14 +32,27 @@ public class InfoRequestService {
     }
 
     public void guardar(String idMensaje, Request request) {
-        String id = UUID.randomUUID().toString();
 
         InfoRequest infoRequest = new InfoRequest();
-        infoRequest.setId(id);
-        infoRequest.setIdMensaje(idMensaje);
+        infoRequest.setId(idMensaje);
+        // infoRequest.setIdMensaje(idMensaje);
         infoRequest.setTipoServicio(request.getServicio());
         infoRequest.setEstado("PENDIENTE");
         infoRequest.setRequest(RequestMapper.toJson(request));
+
+        table.putItem(infoRequest);
+    }
+
+    public void guardarBatch(String idMensaje, List<? extends Request> request) {
+
+        InfoRequest infoRequest = new InfoRequest();
+        infoRequest.setId(idMensaje);
+        // infoRequest.setIdMensaje(idMensaje);
+        infoRequest.setTipoServicio(request.get(0).getServicio());
+        infoRequest.setEstado("PENDIENTE");
+        infoRequest.setRequest(request.get(0).toString());
+        infoRequest.setCantidad(request.size());
+        infoRequest.setFechaRegistro(LocalDateTime.now().toString());
 
         table.putItem(infoRequest);
     }

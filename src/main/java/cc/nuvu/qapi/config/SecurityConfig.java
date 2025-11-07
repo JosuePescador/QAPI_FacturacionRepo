@@ -39,10 +39,10 @@ public class SecurityConfig {
                                     .requestMatchers("/**").permitAll()
                                     .anyRequest()
                                     .authenticated())
-                    .oauth2ResourceServer(
-                            oauth -> {
-                                oauth.jwt(jwt -> {});
-                            })
+                    // .oauth2ResourceServer(
+                    //         oauth -> {
+                    //             oauth.jwt(jwt -> {});
+                    //         })
                     .sessionManagement(session -> session
                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
