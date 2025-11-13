@@ -14,6 +14,11 @@ spring:
                 static: us-east-1
     # Las credenciales deben ser setteadas en la consola!
 
+    # Exclude the default security auto-configuration
+    autoconfigure:
+        exclude:
+            - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
 aws:
     sqs:
         fifo:
@@ -29,3 +34,14 @@ springdoc:
         path: /api-docs
     swagger-ui:
         path: /docs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,loggers
+  endpoint:
+    health:
+      show-details: always
+
+# Merged 'spring.autoconfigure.exclude' into the main 'spring' mapping above to avoid duplicate keys
+# Exclude the default security auto-configuration

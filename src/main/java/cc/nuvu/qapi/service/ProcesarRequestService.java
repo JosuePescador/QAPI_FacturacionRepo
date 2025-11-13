@@ -25,9 +25,11 @@ public class ProcesarRequestService {
         return id_mensaje;
     }
 
-    public String recibirYProcesarRequestBatch(List<? extends Request> request) throws JsonProcessingException {
-        String id_mensaje = sqsSender.enviarPedidoEnBatch(request);
-        infoRequestService.guardarBatch(id_mensaje, request);
+    public List<String> recibirYProcesarRequestBatch(List<? extends Request> request) throws JsonProcessingException {
+        List<String> id_mensaje = sqsSender.enviarSolicitud(request);
+        for(String mensaje : id_mensaje){
+            infoRequestService.guardarBatch(mensaje, request);
+        }
         return id_mensaje;
     }
 }

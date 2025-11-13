@@ -1,0 +1,186 @@
+╔════════════════════════════════════════════════════════════════════╗
+║          QAPI FacturacionMasiva v1.1.1 - INICIO RÁPIDO            ║
+║     Sistema de Facturación Masiva en AWS con Spring Boot          ║
+╚════════════════════════════════════════════════════════════════════╝
+
+🚀 OPCIÓN 1: Script Automático (Recomendado - 1 comando)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cd /home/joseu_pescado/Descargas/QAPI_FacturacionMasiva
+  ./run.sh
+
+  Luego selecciona:
+    1) Compilar y Ejecutar ⭐ (Recomendado)
+    2) Solo Compilar
+    3) Solo Ejecutar (JAR existente)
+    4) Compilar con Tests
+    5) Ejecutar Tests
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔨 OPCIÓN 2: Comandos Manuales
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  # Paso 1: Compilar el proyecto
+  ./mvnw clean package -DskipTests
+
+  # Paso 2: Ejecutar la aplicación
+  java -jar target/QAPI_FacturacionMasiva-1.1.1.jar \
+    --spring.profiles.active=dev
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFICAR QUE FUNCIONA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Una vez que la aplicación inicia, abre en otra terminal:
+
+  1. Health Check (terminal):
+     curl http://localhost:8080/actuator/health
+
+  2. Swagger UI (navegador):
+     http://localhost:8080/docs
+
+  3. Ver logs:
+     tail -f nohup.out | grep -i "started\|error"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 ESTRUCTURA ESPERADA AL INICIAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Logs esperados:
+
+    [main] INFO  o.s.b.w.e.t.TomcatWebServer
+    → Tomcat started on port(s): 8080
+
+    [main] INFO  c.n.q.QapiFacturacionMasivaApplication
+    → Started QapiFacturacionMasivaApplication
+
+    [main] DEBUG o.s.s.w.SecurityFilterChain
+    → Security: dev profile - CSRF disabled
+
+    [main] INFO  o.s.b.SpringApplication
+    → Application ready to receive requests
+
+  Ports:
+    - API REST: http://localhost:8080
+    - Swagger UI: http://localhost:8080/docs
+    - Health: http://localhost:8080/actuator/health
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔑 CONFIGURAR AWS (Opcional - Solo si usas SQS/DynamoDB)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Antes de ejecutar, configura:
+
+  export AWS_ACCESS_KEY_ID="tu_access_key"
+  export AWS_SECRET_ACCESS_KEY="tu_secret_key"
+  export AWS_REGION="us-east-1"
+
+  O crea ~/.aws/credentials:
+
+  [default]
+  aws_access_key_id = tu_access_key
+  aws_secret_access_key = tu_secret_key
+  region = us-east-1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 PROBAR API - Ejemplo de cURL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  # Health Check
+  curl -X GET "http://localhost:8080/actuator/health" \
+    -H "Content-Type: application/json"
+
+  # Enviar Nota de Débito (requiere SQS configurado)
+  curl -X POST "http://localhost:8080/facturacion-masiva/nota-debito" \
+    -H "Content-Type: application/json" \
+    -d '[{
+      "tercero": {
+        "claseIdentificacion": "CC",
+        "numeroIdentificacion": 1234567890
+      },
+      "conceptoPrincipal": [{
+        "conceptoFacturacion": "Servicio",
+        "cantidadUnidades": "1",
+        "valorUnitario": "100000"
+      }]
+    }]'
+
+  Ver más ejemplos en: EJEMPLOS_API.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Documento                      Contenido
+  ─────────────────────────────────────────────────────────────
+  README_RAPIDO.md              Inicio rápido y overview
+  GUIA_EJECUCION.md             Guía completa paso a paso
+  EJEMPLOS_API.md               Ejemplos de cURL y testing
+  Analisis_ConceptoPrincipal.md Análisis del modelo de datos
+
+  Ver con: cat [archivo].md o abre en VS Code
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ SOLUCIÓN DE PROBLEMAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ❌ Error: Port 8080 already in use
+     ✅ Solución: java -jar ... --server.port=9090
+
+  ❌ Error: AWS Credentials not found
+     ✅ Solución: export AWS_ACCESS_KEY_ID="..."
+
+  ❌ Error: Java version not compatible
+     ✅ Solución: Instalar Java 17 - java -version
+
+  ❌ Build fails
+     ✅ Solución: ./mvnw clean (limpiar) y reintentar
+
+  Ver más: GUIA_EJECUCION.md → "Solución de Problemas"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ☐ Java 17 instalado:        java -version
+  ☐ Proyecto compilado:       ./mvnw clean package
+  ☐ Aplicación iniciada:      java -jar ... (en puerto 8080)
+  ☐ Health Check OK:          curl localhost:8080/actuator/health
+  ☐ Swagger accesible:        http://localhost:8080/docs
+  ☐ AWS configurado (opt):    echo $AWS_ACCESS_KEY_ID
+
+  Si todos están ✓, ¡el sistema está funcionando correctamente!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️  INFORMACIÓN DEL PROYECTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Versión:      1.1.1
+  Java:         17 (JDK)
+  Spring Boot:  3.4.2
+  Maven:        3.6+
+  Framework:    Spring Cloud AWS
+  Tecnologías:  SQS FIFO, DynamoDB, OAuth2 Keycloak, Swagger 3.0
+  Tipo:         API REST Microservicio
+  Puerto:       8080 (por defecto)
+  Perfil:       dev (desarrollo local) o prod (producción)
+
+  Última actualización: 13 de noviembre de 2025
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 ¡LISTO! Sigue los pasos anteriores para ejecutar y verificar.
+
+   Primera vez: ./run.sh 1
+   Luego: curl http://localhost:8080/actuator/health
+
+═══════════════════════════════════════════════════════════════════
