@@ -1,0 +1,3 @@
+FROM 225711149285.dkr.ecr.us-east-1.amazonaws.com/openjdk:17
+ADD ./target/QAPI_FacturacionMasiva.jar ./
+

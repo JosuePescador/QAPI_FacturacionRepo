@@ -1,0 +1,47 @@
+spring:
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: https://iam.ia.ucaldas.nuvu.cc/realms/factMasivaTest
+    devtools:
+        restart:
+            enabled: false
+    cloud:
+        aws:
+            endpoint: http://localhost:4566
+            region:
+                static: us-east-1
+    # Las credenciales deben ser setteadas en la consola!
+
+    # Exclude the default security auto-configuration
+    autoconfigure:
+        exclude:
+            - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+aws:
+    sqs:
+        fifo:
+            queue:
+                # url: "https://sqs.us-east-1.amazonaws.com/225711149285/uca-test-factmasiva-sqs.fifo"
+                # url: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/uca-test-factmasiva-sqs.fifo"
+                name: "uca-test-factmasiva-sqs.fifo"
+    s3:
+        bucketname: "uca-test-facturacionmasiva-auditory"
+        
+springdoc:
+    api-docs:
+        path: /api-docs
+    swagger-ui:
+        path: /docs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,loggers
+  endpoint:
+    health:
+      show-details: always
+
+# Merged 'spring.autoconfigure.exclude' into the main 'spring' mapping above to avoid duplicate keys
+# Exclude the default security auto-configuration
