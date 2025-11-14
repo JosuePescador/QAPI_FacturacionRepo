@@ -34,30 +34,40 @@ public class SqsSender {
         List<String> idsInBatch = new ArrayList<>();
         
         for(List<? extends Request> parte: partes) {
-            idsInBatch.add(enviarPedidoEnBatch(request));
+            String messageId = enviarPedidoEnBatch(parte);  // ✅ FIX: enviar "parte" no "request"
+            idsInBatch.add(messageId);
+            log.info("📤 Mensaje enviado a SQS - MessageId: {} - Items en batch: {}", messageId, parte.size());
         }
         return idsInBatch;
     }
 
     public String enviarPedido(Request request) throws JsonProcessingException {
         String body = objectMapper.writeValueAsString(request);
+        log.info("📨 Enviando mensaje individual a SQS - Cola: {}", queueName);
+        log.debug("📄 Body: {}", body);
+        
         SendResult<String> result = sqsTemplate.send(
                 to -> to
                         .queue(queueName)
                         .payload(body));
 
         String messageId = result.messageId().toString();
+        log.info("✅ Mensaje enviado - MessageId: {}", messageId);
         return messageId;
     }
 
     public String enviarPedidoEnBatch(List<? extends Request> request) throws JsonProcessingException {
         String body = objectMapper.writeValueAsString(request);
+        log.info("📨 Enviando batch a SQS - Cola: {} - Items: {}", queueName, request.size());
+        log.debug("📄 Body: {}", body);
+        
         SendResult<String> result = sqsTemplate.send(
                 to -> to
                         .queue(queueName)
                         .payload(body));
 
         String messageId = result.messageId().toString();
+        log.info("✅ Batch enviado - MessageId: {}", messageId);
         return messageId;
     }
 
