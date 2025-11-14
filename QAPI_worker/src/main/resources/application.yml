@@ -1,0 +1,27 @@
+spring:
+    application:
+        name: QAPI_FacturacionMasivaWorker
+    profiles:
+        active: "dev"
+    data:
+        jdbc:
+            dialect: oracle
+    jpa:
+        properties:
+            hibernate:
+                ddl-auto: none
+                format_sql: true
+                use_sql_comments: true
+                connection:
+                    provider_disables_autocommit: false
+        open-in-view: false
+
+logging:
+  level:
+    org:
+        hibernate:
+            sql: DEBUG
+            type:
+                descriptor:
+                    sql: trace
+
