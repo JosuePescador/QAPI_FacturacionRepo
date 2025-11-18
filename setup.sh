@@ -1,9 +1,7 @@
 #!/bin/bash
 
-################################################################################
-# Script Maestro - Configuración y Ejecución Completa
-# Ejecuta todo el sistema QAPI en orden
-################################################################################
+#ejecucion completa 
+
 
 # Directorio base
 BASE_DIR="/home/adminblend/Escritorio/Blend/ucaldas/QAPI_FacturacionRepo"
@@ -13,11 +11,10 @@ cd "$BASE_DIR"
 # 1. Iniciar LocalStack
 echo -e  "Iniciando LocalStack"
 
-
-echo -e "${YELLOW}→${NC} Deteniendo contenedores anteriores..."
+echo -e " Deteniendo contenedores anteriores..."
 docker-compose down 2>/dev/null || true
 
-echo -e "${YELLOW}→${NC} Iniciando LocalStack..."
+echo -e "Iniciando LocalStack..."
 docker-compose up -d
 
 echo -e "${YELLOW}→${NC} Esperando a que LocalStack esté listo..."

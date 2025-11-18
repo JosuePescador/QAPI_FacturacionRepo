@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
+import cc.nuvu.qapi.infraestructure.dynamoDB.service.InfoRequestProcessingService;
 import cc.nuvu.qapi.service.ProcesamientoService;
 import software.amazon.awssdk.services.sqs.model.Message;
 
@@ -16,11 +17,14 @@ import software.amazon.awssdk.services.sqs.model.Message;
 public class SqsQAPIListener {
 
     private final ProcesamientoService procesamientoService;
+    private final InfoRequestProcessingService infoRequestProcessingService;
 
     public SqsQAPIListener(
-            ProcesamientoService procesamientoService
+            ProcesamientoService procesamientoService,
+            InfoRequestProcessingService infoRequestProcessingService
             ) {
         this.procesamientoService = procesamientoService;
+        this.infoRequestProcessingService = infoRequestProcessingService;
     }
 
     // TODO: Si las peticiones fueran objetos simples sólo habría que usar un MAP y ahí entrarían sin conflicto los values, sin embargo, hay que meter mappers y declarar peticiones para ciertos objetos, lo cual, no está chévere
@@ -39,9 +43,24 @@ public class SqsQAPIListener {
         String body = message.body();                 
         String messageId = message.messageId();
 
+        // 1️⃣ Guardar mensaje consumido en InfoRequestProcessing
+        log.info("📥 Mensaje consumido de SQS - MessageId: {}", messageId);
+        infoRequestProcessingService.guardarMensajeConsumido(messageId, body, "RECIBIDO");
+
         try {
+            // 2️⃣ Actualizar estado a PROCESANDO
+            infoRequestProcessingService.actualizarEstado(messageId, "PROCESANDO", null);
+            
+            // 3️⃣ Procesar el servicio
             procesamientoService.procesarServicio(body, messageId);
+            
+            // 4️⃣ Si todo sale bien, marcar como COMPLETADO
+            infoRequestProcessingService.actualizarEstado(messageId, "COMPLETADO", null);
+            
         } catch (Exception e) {
+            // 5️⃣ Si hay error, marcar como ERROR
+            log.error("❌ Error procesando mensaje - MessageId: {}", messageId, e);
+            infoRequestProcessingService.actualizarEstado(messageId, "ERROR", e.getMessage());
             throw new RuntimeException(e);
         }
     }

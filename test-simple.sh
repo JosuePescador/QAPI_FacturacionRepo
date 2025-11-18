@@ -53,7 +53,7 @@ RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
       "tercero": {
         "claseIdentificacion": "CC",
         "numeroIdentificacion": 999888777,
-        "descripcionAuxiliar": "Test Simple",
+        "descripcionAuxiliar": "Tes",
         "naturalJuridica": "Persona Natural",
         "tipoAuxiliar": "Comprador",
         "tipoRetencion": "Ninguna",
@@ -67,7 +67,7 @@ RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
       },
       "listado_cptos_principales": [
         {
-          "conceptoFacturacion": "Test Simple",
+          "conceptoFacturacion": "MATRICULA",
           "cantidadUnidades": "1",
           "valorUnitario": "100000"
         }

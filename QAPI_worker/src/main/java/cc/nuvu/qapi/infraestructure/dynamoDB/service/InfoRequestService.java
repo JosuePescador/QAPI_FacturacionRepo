@@ -42,9 +42,21 @@ public class InfoRequestService {
                 ? firstNode.get("servicio").asText()
                 : "DESCONOCIDO";
 
-        log.info("resultado: " + firstNode.toString());
+        log.info("📝 Guardando estado para messageId: {} | Estado: {}", idMensaje, estado);
 
         if (infoRequest != null) {
+            // Actualizar registro existente
+            log.info("♻️ Actualizando registro existente");
+            infoRequest.setTipoServicio(tipoServicio);
+            infoRequest.setEstado(estado);
+            infoRequest.setRequest(firstNode.toString());
+            infoRequest.setCantidad(request.size());
+            infoRequest.setFechaRegistro(LocalDateTime.now().toString());
+        } else {
+            // Crear nuevo registro
+            log.info("🆕 Creando nuevo registro");
+            infoRequest = new InfoRequest();
+            infoRequest.setId(idMensaje); // ← CRÍTICO: establecer el ID (partition key)!
             infoRequest.setTipoServicio(tipoServicio);
             infoRequest.setEstado(estado);
             infoRequest.setRequest(firstNode.toString());
@@ -53,6 +65,7 @@ public class InfoRequestService {
         }
 
         table.putItem(infoRequest);
+        log.info("✅ Registro guardado en InfoRequest: {}", idMensaje);
     }
 
 }
