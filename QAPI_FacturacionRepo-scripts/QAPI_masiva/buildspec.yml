@@ -1,0 +1,55 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo Trayendo archivos necesarios
+      - cd ..
+      - mkdir installers 
+      - cd installers/
+      - aws s3 cp s3://uca-test-artifact/installers/apache-maven-3.9.1-bin.tar.gz .
+      - aws s3 cp s3://uca-test-artifact/installers/jdk-17.0.7_linux-x64_bin.tar.gz .
+      - tar -xvzf jdk-17.0.7_linux-x64_bin.tar.gz
+      - tar -xvzf apache-maven-3.9.1-bin.tar.gz
+      - cd ..
+      - ls
+      - cd src
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+  build:  
+    on-failure: ABORT
+    commands:
+      - VERSION=$(cat ./src/main/java/version.txt)
+      - echo Compilando Java
+      - pwd
+      - export JAVA_HOME='../installers/jdk-17.0.7' 
+      - export PATH=$JAVA_HOME'/bin:'$PATH
+      - export M2_HOME='/home/lisa/apache-maven-3.9.1'
+      - export PATH=$M2_HOME'/bin:'$PATH
+      - java -version
+      - mvn -DskipTests package
+      - mv ./target/QAPI_FacturacionMasiva-1.1.1.jar ./target/QAPI_FacturacionMasiva.jar
+      - ls
+      - echo Generando Imagen de docker
+      - docker build -t $ECR_REPOSITORY_URI:$VERSION .
+      - docker tag $ECR_REPOSITORY_URI:$VERSION $ECR_REPOSITORY_URI:$VERSION
+  post_build:
+    on-failure: ABORT
+    commands:
+      - echo Subiendo jar a s3
+      - VERSION=$(cat ./src/main/java/version.txt)
+      - echo $VERSION
+      - aws s3 cp ./target/ s3://uca-test-artifact/app/QAPI_FacturacionMasiva/$VERSION/ --recursive
+      - echo Subiendo imagen de docker a ECR
+      - docker push $ECR_REPOSITORY_URI:$VERSION
+      - printf '{"ImageURI":"%s:%s"}' $ECR_REPOSITORY_URI $VERSION > imageDetail.json
+artifacts:
+  files:
+    - imageDetail.json
+

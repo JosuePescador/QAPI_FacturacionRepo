@@ -1,0 +1,42 @@
+Convertir el lambda en .zip
+
+zip -r lambda_function.zip lambda_function.py
+
+-- Crear la función de lambda en localStack
+
+awslocal lambda create-function \
+  --function-name procesarEventosInfoRequest \
+  --runtime python3.12 \
+  --role arn:aws:iam::000000000000:role/lambda-role \
+  --handler lambda_function.lambda_handler \
+  --zip-file fileb://lambda_function.zip
+
+-- en AWS real
+
+aws lambda create-function \
+  --function-name procesarEventosInfoRequest \
+  --runtime python3.12 \
+  --role arn:aws:iam::<tu_id_cuenta>:role/<tu_rol_lambda> \
+  --handler lambda_function.lambda_handler \
+  --zip-file fileb://lambda_function.zip
+
+-- Vincular tabla de lambda con dynamoDB
+
+awslocal lambda create-event-source-mapping \
+  --function-name procesarEventosInfoRequest \
+  --event-source-arn arn:aws:dynamodb:us-east-1:000000000000:table/InfoRequest/stream/2025-11-09T21:04:36.700 \
+  --starting-position LATEST
+  
+ROL DE IAM PARA LAMBDA EN AWS REAL:
+
+{
+  "Effect": "Allow",
+  "Action": [
+    "dynamodb:*",
+    "ses:SendEmail",
+    "ses:SendRawEmail",
+    "logs:*"
+  ],
+  "Resource": "*"
+}
+

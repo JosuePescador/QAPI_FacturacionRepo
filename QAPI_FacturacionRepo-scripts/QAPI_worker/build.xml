@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="QAPI_FacturacionMasivaWorker" default="dist">
+
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+	<target name="dist">
+
+		<delete dir="dist"/>
+		<delete dir="target"/>
+		<exec executable="bash" dir=".">
+			<arg value="-c" />
+			<arg value="mvn -DskipTests package" />
+		</exec>
+		
+		<copy file="target/QAPI_FacturacionMasivaWorker-1.1.0.jar" tofile="dist/QAPI_FacturacionMasivaWorker.jar"></copy>
+
+	</target>
+
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+</project>

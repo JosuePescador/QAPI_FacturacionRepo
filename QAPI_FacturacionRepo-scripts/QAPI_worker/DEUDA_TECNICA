@@ -1,0 +1,3 @@
+1. El código necesita manejar excepciones!
+2. El código necesita hacer uso de constantes para escalar mejor!
+3. El código debe desacoplarse un poco más en cuanto a los métodos!!
