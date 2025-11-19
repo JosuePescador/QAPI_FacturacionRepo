@@ -54,7 +54,7 @@ echo -e "${BLUE}║  Paso 3: Build local (QAPI_masiva + QAPI_worker)           �
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-"$BASE_DIR/scripts/build-local.sh"
+"$BASE_DIR/scripts/build-local-docker.sh"
 echo ""
 
 ###############################################################################

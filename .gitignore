@@ -85,7 +85,9 @@ QAPI_masiva/run_full_e.log~
 **/override.tf
 **/override.tf.json
 **/terraform.rc     
-
-
-
-git rm --cached QAPI_FacturacionRepo-scripts/infra/terraform/terraform.tfstate QAPI_FacturacionRepo-scripts/infra/terraform/terraform.tfstate.backup
+localstack-data/
+localstack-data/cache/
+localstack-data/infra/
+localstack-data/tmp/
+.localstack/
+########################
