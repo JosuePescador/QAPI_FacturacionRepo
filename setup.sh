@@ -4,7 +4,7 @@
 
 
 # Directorio base
-BASE_DIR="/home/adminblend/Escritorio/Blend/ucaldas/QAPI_FacturacionRepo"
+BASE_DIR="/home/joseu_pescado/Descargas/QAPI_FacturacionRepo"
 cd "$BASE_DIR"
 
 
