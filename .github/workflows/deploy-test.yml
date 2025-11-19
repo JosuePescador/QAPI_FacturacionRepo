@@ -58,6 +58,7 @@ jobs:
           path: deployment/
 
       - name: Deploy to Test Server
+        if: secrets.TEST_SERVER_HOST != ''
         env:
           TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
           TEST_SERVER_USER: ${{ secrets.TEST_SERVER_USER }}
@@ -80,7 +81,17 @@ jobs:
             bash init-localstack.sh
           EOF
 
+      - name: Deploy to Test Server - Skipped (Secrets not configured)
+        if: secrets.TEST_SERVER_HOST == ''
+        run: |
+          echo "⏭️  Deploy skipped - TEST_SERVER_HOST secret not configured"
+          echo "To enable deployment, add these secrets to GitHub:"
+          echo "  - TEST_SERVER_HOST"
+          echo "  - TEST_SERVER_USER"
+          echo "  - TEST_SERVER_KEY"
+
       - name: Smoke Tests
+        if: secrets.TEST_SERVER_HOST != ''
         run: |
           echo "Waiting for services to be ready..."
           sleep 30
@@ -97,7 +108,11 @@ jobs:
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            echo "✓ Deployment to test environment completed successfully"
+            if [ "${{ secrets.TEST_SERVER_HOST }}" != "" ]; then
+              echo "✓ Deployment to test environment completed successfully"
+            else
+              echo "✓ Build completed successfully (deployment skipped - secrets not configured)"
+            fi
           else
             echo "✗ Deployment to test environment failed"
           fi
