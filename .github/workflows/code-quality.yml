@@ -1,0 +1,49 @@
+name: Code Quality & Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - scripts
+  pull_request:
+    branches:
+      - main
+      - develop
+      - scripts
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build QAPI_masiva with all checks
+        run: |
+          cd QAPI_masiva
+          mvn clean verify
+          cd ..
+
+      - name: Build QAPI_worker with all checks
+        run: |
+          cd QAPI_worker
+          mvn clean verify
+          cd ..
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-reports
+          path: |
+            QAPI_masiva/target/site/
+            QAPI_worker/target/site/
