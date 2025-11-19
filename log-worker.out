@@ -1,0 +1,1411 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.2)
+
+2025-11-18T20:46:22.398-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] q.QapiFacturacionMasivaWorkerApplication : Starting QapiFacturacionMasivaWorkerApplication v1.1.0 using Java 17.0.16 with PID 29645 (/home/fabio/retos/Chamba/QAPI_FacturacionRepo/QAPI_worker/target/QAPI_FacturacionMasivaWorker-1.1.0.jar started by fabio in /home/fabio/retos/Chamba/QAPI_FacturacionRepo/QAPI_worker)
+2025-11-18T20:46:22.402-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] q.QapiFacturacionMasivaWorkerApplication : The following 1 profile is active: "dev"
+2025-11-18T20:46:23.782-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-18T20:46:23.816-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+2025-11-18T20:46:24.548-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-11-18T20:46:24.565-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-18T20:46:24.566-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-11-18T20:46:24.608-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-18T20:46:24.611-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2153 ms
+2025-11-18T20:46:24.972-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-18T20:46:26.170-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@44bc2449
+2025-11-18T20:46:26.172-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-18T20:46:26.242-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-18T20:46:26.351-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-11-18T20:46:26.412-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-18T20:46:26.756-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-18T20:46:27.438-05:00  WARN 29645 --- [QAPI_FacturacionMasivaWorker] [           main] org.hibernate.dialect.Dialect            : HHH000511: The 12.1.0 version for [org.hibernate.dialect.OracleDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 19.0.0. Check the community dialects project for available legacy versions.
+2025-11-18T20:46:27.881-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 12.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-11-18T20:46:28.265-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-18T20:46:28.270-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-18T20:46:30.285-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2025-11-18T20:46:30.809-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ecycle-thread-1] a.c.s.l.AbstractMessageListenerContainer : Container io.awspring.cloud.sqs.sqsListenerEndpointContainer#0 started
+2025-11-18T20:46:30.825-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [           main] q.QapiFacturacionMasivaWorkerApplication : Started QapiFacturacionMasivaWorkerApplication in 9.255 seconds (process running for 9.971)
+2025-11-18T20:46:31.198-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-18T20:46:31.198-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-18T20:46:31.200-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-11-18T20:46:32.874-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:46:32.875-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:46:33.096-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:46:33.182-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:46:33.190-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:46:33.195-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:46:33.195-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:46:36.250-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:46:36.295-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:46:36.299-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-1] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:47:03.733-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:03.733-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:47:03.756-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:47:03.786-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:47:03.787-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:03.787-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:47:03.787-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:04.356-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:47:04.389-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:47:04.390-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-2] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:47:33.735-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:33.736-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:47:33.760-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:47:33.791-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:47:33.791-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:33.792-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:47:33.792-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:47:34.352-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:47:34.387-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:47:34.388-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-3] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:48:04.734-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:04.735-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:48:04.765-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:48:04.799-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:48:04.799-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:04.800-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:48:04.800-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:05.404-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:48:05.445-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:48:05.446-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-4] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:48:34.737-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:34.737-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:48:34.773-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:48:34.802-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:48:34.802-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:34.803-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:48:34.803-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:48:35.412-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:48:35.443-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:48:35.444-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-5] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:49:05.734-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:05.735-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:49:05.770-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:49:05.818-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:49:05.818-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:05.819-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:49:05.819-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:06.416-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:49:06.462-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:49:06.464-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-6] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:49:35.743-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:35.744-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:49:35.770-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:49:35.801-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:49:35.802-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:35.803-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:49:35.803-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:49:36.694-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:49:36.725-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:49:36.726-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-7] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:50:06.733-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.p.listener.SqsQAPIListener         : 📥 Mensaje consumido de SQS - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:50:06.733-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.i.d.s.InfoRequestProcessingService : 💾 Guardando mensaje en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: RECIBIDO
+2025-11-18T20:50:06.793-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Mensaje guardado exitosamente en InfoRequestProcessing
+2025-11-18T20:50:06.822-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: PROCESANDO
+2025-11-18T20:50:06.823-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.qapi.service.ProcesamientoService    : 📩 Recibido lote de facturas: 1 | MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:50:06.823-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.qapi.service.ProcesamientoService    : Jsonnode[{"cicloLectivo":"2025-1","cuentaConsignacion":987654321,"listado_cptos_principales":[{"conceptoFacturacion":"Servicio Test E2E","cantidadUnidades":"1","valorUnitario":"500000"}],"nit_tercero":123456789,"referencia":"TEST-E2E-001","tercero":{"claseIdentificacion":"CC","numeroIdentificacion":123456789,"descripcionAuxiliar":"Cliente Test E2E","naturalJuridica":"Persona Natural","tipoAuxiliar":"Comprador","tipoRetencion":"Ninguna","codigoPais":170,"codigoDepartamento":25,"codigoCiudad":25001,"celular":"3001234567","telefono":"6011234567","direccion":"Calle Test 123","correoElectronico":"test@example.com"},"servicio":"NOTA-DEBITO"}]
+2025-11-18T20:50:06.823-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.qapi.service.ProcesamientoService    : 🔄 Procesando nota de débito - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+2025-11-18T20:50:07.434-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.p.listener.SqsQAPIListener         : ❌ Error procesando mensaje - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+
+java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+
+2025-11-18T20:50:07.470-05:00  INFO 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] c.n.q.i.d.s.InfoRequestProcessingService : ✅ Estado actualizado en InfoRequestProcessing - MessageId: 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f, Estado: ERROR
+2025-11-18T20:50:07.471-05:00 ERROR 29645 --- [QAPI_FacturacionMasivaWorker] [ntContainer#0-8] .s.AbstractMessageProcessingPipelineSink : Error processing message 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f.
+
+java.util.concurrent.CompletionException: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyNow(CompletableFuture.java:674) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniApplyStage(CompletableFuture.java:662) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenApply(CompletableFuture.java:2168) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageListenerExecutionStage.process(MessageListenerExecutionStage.java:49) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.lambda$process$0(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1187) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$ComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:80) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.pipeline.MessageProcessingPipelineBuilder$FutureComposingMessagePipelineStage.process(MessageProcessingPipelineBuilder.java:104) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.sink.AbstractMessageProcessingPipelineSink.lambda$execute$0(AbstractMessageProcessingPipelineSink.java:135) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: io.awspring.cloud.sqs.listener.AsyncAdapterBlockingExecutionFailedException: Error executing action in BlockingMessageListenerAdapter
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.wrapWithBlockingException(AsyncComponentAdapters.java:178) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:140) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.execute(AsyncComponentAdapters.java:127) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$BlockingMessageListenerAdapter.onMessage(AsyncComponentAdapters.java:262) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 14 common frames omitted
+Caused by: io.awspring.cloud.sqs.listener.ListenerExecutionFailedException: Listener failed to process messages 2a032ce3-ebcd-49a1-ad1f-7fdefef5d70f
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$MicrometerObservationThreadLocalWrapper$ObservationAwareCloseableScope.onExecutionError(AsyncComponentAdapters.java:390) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:210) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.runInSameThread(AsyncComponentAdapters.java:136) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 16 common frames omitted
+Caused by: java.lang.RuntimeException: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:64) ~[!/:1.1.0]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119) ~[spring-messaging-6.2.2.jar!/:6.2.2]
+	at io.awspring.cloud.sqs.listener.adapter.AbstractMethodInvokingListenerAdapter.invokeHandler(AbstractMethodInvokingListenerAdapter.java:56) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:41) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	at io.awspring.cloud.sqs.listener.AsyncComponentAdapters$AbstractThreadingComponentAdapter.lambda$withConsumerThreadLocalScope$3(AsyncComponentAdapters.java:206) ~[spring-cloud-aws-sqs-3.4.0.jar!/:3.4.0]
+	... 17 common frames omitted
+Caused by: java.lang.RuntimeException: ❌ Error llamando FA_QFAMA.guardaMultiplesFacturas
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:41) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.notaDebito(ProcesamientoService.java:61) ~[!/:1.1.0]
+	at cc.nuvu.qapi.service.ProcesamientoService.procesarServicio(ProcesamientoService.java:51) ~[!/:1.1.0]
+	at cc.nuvu.qapi.presentation.listener.SqsQAPIListener.consumir(SqsQAPIListener.java:55) ~[!/:1.1.0]
+	... 26 common frames omitted
+Caused by: org.springframework.jdbc.UncategorizedSQLException: CallableStatementCallback; uncategorized SQLException for SQL [{call FA_QFAMA.GUARDAMULTIPLESFACTURAS(?, ?)}]; SQL state [99999]; error code [17072]; Inserted value too large for column: "Servicio Test E2E"
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1557) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1191) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1230) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.executeCallInternal(AbstractJdbcCall.java:423) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.AbstractJdbcCall.doExecute(AbstractJdbcCall.java:383) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.simple.SimpleJdbcCall.execute(SimpleJdbcCall.java:205) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at cc.nuvu.qapi.infraestructure.Oracle.service.OraclePackageService.llamarGuardarMultiples(OraclePackageService.java:38) ~[!/:1.1.0]
+	... 29 common frames omitted
+Caused by: java.sql.SQLException: Inserted value too large for column: "Servicio Test E2E"
+	at oracle.jdbc.oracore.OracleTypeCHAR.pickle81(OracleTypeCHAR.java:347) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81rec(OracleTypeADT.java:2644) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2498) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeUPT.pickle81(OracleTypeUPT.java:220) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeCOLLECTION.pickle81(OracleTypeCOLLECTION.java:318) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.pickle81(OracleTypeADT.java:2479) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.oracore.OracleTypeADT.linearize(OracleTypeADT.java:2123) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ArrayDescriptor.toBytes(ArrayDescriptor.java:783) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleArray.toBytes(OracleArray.java:653) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.sql.ARRAY.toBytes(ARRAY.java:662) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setArrayCritical(OraclePreparedStatement.java:6033) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setARRAYInternal(OraclePreparedStatement.java:5980) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectCritical(OraclePreparedStatement.java:8747) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8261) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.setObjectInternal(OraclePreparedStatement.java:8861) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OracleCallableStatement.setObject(OracleCallableStatement.java:4624) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.setObject(OraclePreparedStatementWrapper.java:227) ~[ojdbc11-21.5.0.0.jar!/:21.5.0.0.0]
+	at com.zaxxer.hikari.pool.HikariProxyCallableStatement.setObject(HikariProxyCallableStatement.java) ~[HikariCP-5.1.0.jar!/:na]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:460) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:247) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.CallableStatementCreatorFactory$CallableStatementCreatorImpl.createCallableStatement(CallableStatementCreatorFactory.java:209) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1170) ~[spring-jdbc-6.2.2.jar!/:6.2.2]
+	... 34 common frames omitted
+

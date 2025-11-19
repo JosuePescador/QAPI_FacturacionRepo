@@ -9,14 +9,12 @@ import cc.nuvu.qapi.model.Tercero;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 public class NotaDebitoRequest extends Request {
     @NotNull(message = "La referencia no debe ser nula")
     @NotEmpty(message = "El nombre no puede estar vacío")
@@ -47,16 +45,5 @@ public class NotaDebitoRequest extends Request {
         this.nitTercero = nitTercero;
         this.referencia = referencia;
         this.tercero = tercero;
-    }
-    
-    // Sobrescribir getServicio para asegurar que siempre retorna NOTA-DEBITO
-    @Override
-    public String getServicio() {
-        String servicio = super.getServicio();
-        if (servicio == null) {
-            setServicio("NOTA-DEBITO");
-            return "NOTA-DEBITO";
-        }
-        return servicio;
     }
 }

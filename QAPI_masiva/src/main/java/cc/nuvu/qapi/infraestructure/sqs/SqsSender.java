@@ -34,9 +34,7 @@ public class SqsSender {
         List<String> idsInBatch = new ArrayList<>();
         
         for(List<? extends Request> parte: partes) {
-            String messageId = enviarPedidoEnBatch(parte);  // ✅ FIX: enviar "parte" no "request"
-            idsInBatch.add(messageId);
-            log.info("📤 Mensaje enviado a SQS - MessageId: {} - Items en batch: {}", messageId, parte.size());
+            idsInBatch.add(enviarPedidoEnBatch(request));
         }
         return idsInBatch;
     }

@@ -1,98 +1,110 @@
 #!/bin/bash
 
-################################################################################
-# Script Maestro - Configuración y Ejecución Completa
-# Ejecuta todo el sistema QAPI en orden
-################################################################################
+set -euo pipefail
+###############################################################################
+# Setup completo entorno local QAPI Facturación Masiva
+# 1) Infra (Docker + LocalStack)
+# 2) IaC local (Terraform sobre LocalStack)
+# 3) Build (QAPI_masiva + QAPI_worker)
+# 4) Deploy local (levantar los JARs)
+# 5) Tests end-to-end
+###############################################################################
 
-# Directorio base
-BASE_DIR="/home/adminblend/Escritorio/Blend/ucaldas/QAPI_FacturacionRepo"
-cd "$BASE_DIR"
+# Descubrir BASE_DIR (root del repo)
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+MAGENTA='\033[0;35m'
 
-# 1. Iniciar LocalStack
-echo -e  "Iniciando LocalStack"
-
-
-echo -e "${YELLOW}→${NC} Deteniendo contenedores anteriores..."
-docker-compose down 2>/dev/null || true
-
-echo -e "${YELLOW}→${NC} Iniciando LocalStack..."
-docker-compose up -d
-
-echo -e "${YELLOW}→${NC} Esperando a que LocalStack esté listo..."
-sleep 5
-
-if curl -s http://localhost:4566/_localstack/health > /dev/null 2>&1; then
-    echo -e "${GREEN}✓${NC} LocalStack está corriendo en puerto 4566"
-else
-    echo -e "${RED}✗${NC} LocalStack no respondió. Revisa con: docker logs localstack-qapi"
-    exit 1
-fi
-
-# 3. Inicializar recursos
-echo ""
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║  Paso 3: Creando recursos de AWS                          ║${NC}"
+echo -e "${BLUE}║  Setup local: QAPI Facturación Masiva                      ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
-
-./init-localstack.sh
-
-# 4. Compilar proyectos
 echo ""
+
+###############################################################################
+# Paso 1: Infraestructura local (Docker + LocalStack)
+###############################################################################
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║  Paso 4: Compilando proyectos                             ║${NC}"
+echo -e "${BLUE}║  Paso 1: Infraestructura local (Docker + LocalStack)       ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
 
-echo -e "${YELLOW}→${NC} Compilando QAPI_masiva..."
-cd "$BASE_DIR/QAPI_masiva"
-mvn clean package -DskipTests -q
-if [ -f "target/QAPI_FacturacionMasiva-1.1.1.jar" ]; then
-    echo -e "${GREEN}✓${NC} QAPI_masiva compilado"
-else
-    echo -e "${RED}✗${NC} Error compilando QAPI_masiva"
-    exit 1
-fi
+"$BASE_DIR/scripts/infra-local.sh"
+echo ""
 
-echo -e "${YELLOW}→${NC} Compilando QAPI_worker..."
-cd "$BASE_DIR/QAPI_worker"
-mvn clean package -DskipTests -q
-if [ -f "target/QAPI_FacturacionMasivaWorker-1.1.0.jar" ]; then
-    echo -e "${GREEN}✓${NC} QAPI_worker compilado"
-else
-    echo -e "${RED}✗${NC} Error compilando QAPI_worker"
-    exit 1
-fi
+###############################################################################
+# Paso 2: IaC local (Terraform sobre LocalStack)
+###############################################################################
+echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  Paso 2: IaC local (Terraform sobre LocalStack)            ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
 
-cd "$BASE_DIR"
+"$BASE_DIR/scripts/iac-local.sh"
+echo ""
 
-# 5. Instrucciones finales
+###############################################################################
+# Paso 3: Build local (QAPI_masiva + QAPI_worker)
+###############################################################################
+echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  Paso 3: Build local (QAPI_masiva + QAPI_worker)           ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+"$BASE_DIR/scripts/build-local.sh"
+echo ""
+
+###############################################################################
+# Paso 4: Deploy local (levantar jars en background)
+###############################################################################
+echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  Paso 4: Deploy local (lanzar servicios)                   ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+"$BASE_DIR/scripts/deploy-local.sh"
+echo ""
+
+###############################################################################
+# Paso 5: Tests end-to-end
+###############################################################################
+echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  Paso 5: Tests end-to-end                                  ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+"$BASE_DIR/scripts/test/test-local.sh"
+echo ""
+
+echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║  ✓ Setup completo (infra + IaC + build + deploy + tests)   ║${NC}"
+echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+###############################################################################
+# Resumen final
+###############################################################################
 echo ""
 echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${GREEN}║  ✓ Setup completado exitosamente                          ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "${MAGENTA}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${MAGENTA}║  Próximos pasos:                                          ║${NC}"
+echo -e "${MAGENTA}║  Servicios y pruebas locales                               ║${NC}"
 echo -e "${MAGENTA}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${YELLOW}TERMINAL 1:${NC} Ejecutar QAPI_masiva"
-echo -e "${CYAN}cd $BASE_DIR/QAPI_masiva${NC}"
-echo -e "${CYAN}java -jar target/QAPI_FacturacionMasiva-1.1.1.jar --spring.profiles.active=dev${NC}"
+echo -e "${CYAN}• LocalStack:${NC}    http://localhost:4566"
+echo -e "${CYAN}• QAPI_masiva:${NC}   http://localhost:8080"
+echo -e "${CYAN}• QAPI_worker:${NC}   http://localhost:8081"
+echo -e "${CYAN}• Swagger:${NC}       http://localhost:8080/docs"
 echo ""
-echo -e "${YELLOW}TERMINAL 2:${NC} Ejecutar QAPI_worker"
-echo -e "${CYAN}cd $BASE_DIR/QAPI_worker${NC}"
-echo -e "${CYAN}java -jar target/QAPI_FacturacionMasivaWorker-1.1.0.jar --spring.profiles.active=dev${NC}"
-echo ""
-echo -e "${YELLOW}TERMINAL 3:${NC} Ejecutar prueba end-to-end"
-echo -e "${CYAN}cd $BASE_DIR${NC}"
-echo -e "${CYAN}./test-e2e.sh${NC}"
-echo ""
-echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
-echo -e "${BLUE}Servicios disponibles:${NC}"
-echo -e "  ${GREEN}•${NC} LocalStack:    http://localhost:4566"
-echo -e "  ${GREEN}•${NC} QAPI_masiva:   http://localhost:8080"
-echo -e "  ${GREEN}•${NC} QAPI_worker:   http://localhost:8081"
-echo -e "  ${GREEN}•${NC} Swagger:       http://localhost:8080/docs"
-echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
+echo -e "${YELLOW}Si necesitas re-ejecutar solo una parte:${NC}"
+echo -e "  ${CYAN}- Infraestructura:${NC}   ./scripts/infra-local.sh"
+echo -e "  ${CYAN}- IaC:${NC}               ./scripts/iac-local.sh"
+echo -e "  ${CYAN}- Build:${NC}             ./scripts/build-local.sh"
+echo -e "  ${CYAN}- Deploy:${NC}            ./scripts/deploy-local.sh"
+echo -e "  ${CYAN}- Tests E2E:${NC}         ./scripts/test/test-e2e.sh"
 echo ""

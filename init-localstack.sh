@@ -3,6 +3,7 @@
 ################################################################################
 # Script de Inicialización de LocalStack para QAPI
 # Crea las colas SQS, tablas DynamoDB y buckets S3 necesarios
+#YA NO SE USA 
 ################################################################################
 
 set -e

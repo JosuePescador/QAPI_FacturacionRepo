@@ -19,9 +19,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/facturacion-masiva")
-@Slf4j
 public class FacturacionMasivaController {
 
     private final ProcesarRequestService procesarRequestService;
@@ -31,24 +31,19 @@ public class FacturacionMasivaController {
     }
 
     @PostMapping("/nota-debito")
-    public ResponseEntity<Map<String, Object>> generarJsonNotaDebito(
-            @Valid @RequestBody List<NotaDebitoRequest> notaDebito,
+    public ResponseEntity<Map<String, Object>> generarJsonNotaDebito(@Valid @RequestBody List<NotaDebitoRequest> notaDebito,
             HttpServletRequest request) throws JsonProcessingException {
         
-        log.info("🎯 POST /facturacion-masiva/nota-debito - Recibidas {} solicitudes", notaDebito.size());
+        log.info("📬 Recibida solicitud POST /nota-debito con {} facturas", notaDebito.size());
         
-        // Procesar las solicitudes
-        List<String> idsGenerados = procesarRequestService.recibirYProcesarRequestBatch(notaDebito);
+        var info = procesarRequestService.recibirYProcesarRequestBatch(notaDebito);
         
-        log.info("✅ Procesamiento completado - MessageIds generados: {}", idsGenerados);
-        
-        // Crear respuesta
         Map<String, Object> response = new HashMap<>();
-        response.put("status", "success");
-        response.put("message", "Solicitudes encoladas correctamente");
-        response.put("totalSolicitudes", notaDebito.size());
-        response.put("messageIds", idsGenerados);
-        response.put("timestamp", java.time.Instant.now().toString());
+        response.put("messageIds", info);
+        response.put("status", "ACCEPTED");
+        response.put("count", info.size());
+        
+        log.info("✅ Respuesta preparada: {} messageIds", info.size());
         
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
