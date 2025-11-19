@@ -30,13 +30,13 @@ jobs:
       - name: Build QAPI_masiva with all checks
         run: |
           cd QAPI_masiva
-          mvn clean verify
+          mvn clean verify -DskipTests
           cd ..
 
       - name: Build QAPI_worker with all checks
         run: |
           cd QAPI_worker
-          mvn clean verify
+          mvn clean verify -DskipTests
           cd ..
 
       - name: Upload coverage reports

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - scripts
   workflow_dispatch:
     inputs:
       environment:
