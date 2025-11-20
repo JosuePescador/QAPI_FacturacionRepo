@@ -6,11 +6,13 @@ on:
       - main
       - develop
       - modules
+      - actions
   pull_request:
     branches:
       - main
       - develop
       - modules
+      - actions
 
 jobs:
   code-quality:
