@@ -58,11 +58,12 @@ jobs:
           mvn clean verify -DskipTests
           cd ..
 
-      - name: Upload coverage reports
+      - name: Upload build artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-reports
+          name: build-results
           path: |
-            QAPI_masiva/target/site/
-            QAPI_worker/target/site/
+            QAPI_masiva/target/*.jar
+            QAPI_worker/target/*.jar
+          if-no-files-found: ignore
