@@ -265,3 +265,4 @@ De forma simplificada, el flujo end-to-end es:
 * Terraform usa `infra/terraform/terraform.tfstate` para rastrear los recursos aplicados en LocalStack.
 
 
+# Test GHA
