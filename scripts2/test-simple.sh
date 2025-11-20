@@ -53,7 +53,7 @@ RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
       "tercero": {
         "claseIdentificacion": "CC",
         "numeroIdentificacion": 999888777,
-        "descripcionAuxiliar": "Tes",
+        "descripcionAuxiliar": "Test Simple",
         "naturalJuridica": "Persona Natural",
         "tipoAuxiliar": "Comprador",
         "tipoRetencion": "Ninguna",
@@ -67,7 +67,7 @@ RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
       },
       "listado_cptos_principales": [
         {
-          "conceptoFacturacion": "MATRICULA",
+          "conceptoFacturacion": "Test Simple",
           "cantidadUnidades": "1",
           "valorUnitario": "100000"
         }
@@ -123,9 +123,3 @@ echo "aws --endpoint-url=http://localhost:4566 sqs receive-message --queue-url $
 echo ""
 echo -e "${CYAN}# Ver logs de QAPI_masiva (en otra terminal):${NC}"
 echo "tail -f /ruta/a/logs o ver la terminal donde corre"
-
----
-
-## 6. Notas técnicas
-
-* El build usa **Java 17** dentroS

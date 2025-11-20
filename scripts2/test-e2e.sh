@@ -78,7 +78,7 @@ echo ""
 
 # 3. Enviar solicitud de facturación
 echo -e "${YELLOW}→${NC} Enviando solicitud de facturación masiva..."
-RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$MASIVA_URL/facturacion-masiva/nota-debito" \
+RESPONSE=$(curl -s -X POST "$MASIVA_URL/facturacion-masiva/nota-debito" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '[
@@ -112,24 +112,12 @@ RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$MASIVA_URL/facturacio
     }
   ]')
 
-# Extraer código HTTP y body
-HTTP_CODE=$(echo "$RESPONSE" | grep "HTTP_CODE" | cut -d':' -f2)
-BODY=$(echo "$RESPONSE" | sed '/HTTP_CODE/d')
-
-echo -e "${CYAN}Código HTTP:${NC} $HTTP_CODE"
 echo -e "${CYAN}Respuesta de la API:${NC}"
-echo "$BODY" | jq '.' 2>/dev/null || echo "$BODY"
+echo "$RESPONSE" | jq '.'
 echo ""
 
-# Verificar código HTTP
-if [ "$HTTP_CODE" != "202" ]; then
-    echo -e "${RED}✗${NC} Error: HTTP $HTTP_CODE (esperaba 202)"
-    echo -e "${YELLOW}La solicitud no fue aceptada. Verifica los logs de QAPI_masiva${NC}"
-    exit 1
-fi
-
 # Extraer messageId
-MESSAGE_ID=$(echo "$BODY" | jq -r '.messageIds[0]')
+MESSAGE_ID=$(echo "$RESPONSE" | jq -r '.messageIds[0]')
 if [ -z "$MESSAGE_ID" ] || [ "$MESSAGE_ID" == "null" ]; then
     echo -e "${RED}✗${NC} No se obtuvo messageId de la respuesta"
     exit 1

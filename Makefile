@@ -1,83 +1,107 @@
-# ================================
-# QAPI LOCAL - Makefile Maestro
-# ================================
+# ============================================
+# QAPI FACTURACIÓN MASIVA - MAKEFILE MAESTRO
+# ============================================
 
-# Variables
-MASIVA_DIR=QAPI_masiva
-WORKER_DIR=QAPI_worker
+SHELL=/bin/bash
 
-MASIVA_JAR=$(MASIVA_DIR)/target/QAPI_FacturacionMasiva-1.1.1.jar
-WORKER_JAR=$(WORKER_DIR)/target/QAPI_FacturacionMasivaWorker-1.1.0.jar
+# Paths
+SCRIPTS_DIR=./scripts
+BUILD_SCRIPT=$(SCRIPTS_DIR)/build/build.sh
+INFRA_SCRIPT=$(SCRIPTS_DIR)/infra/infra.sh
+DEPLOY_SCRIPT=$(SCRIPTS_DIR)/deploy/deploy-local.sh
+RUN_SCRIPT=$(SCRIPTS_DIR)/run/run_worker.sh
+TEST_SCRIPT=$(SCRIPTS_DIR)/test/test.sh
 
-# ============
-# TARGETS
-# ============
+export AWS_ACCESS_KEY_ID=fakeAccessKey123
+export AWS_SECRET_ACCESS_KEY=fakeSecretKey456
+export AWS_SESSION_TOKEN=fakeSession789
+export AWS_DEFAULT_REGION=us-east-1
 
-.PHONY: all localstack build run test e2e dynamo1 dynamo2 clean stop
+# ============================================
+# TARGETS PRINCIPALES
+# ============================================
 
-# 🚀 Ejecuta TODO el pipeline
-all: localstack build run test
+.PHONY: all infra build deploy run test stop clean logs dynamo1 dynamo2 sqs
 
-# ======================
-# 1️⃣ LocalStack
-# ======================
-localstack:
-	@echo "🔥 Levantando LocalStack..."
-	docker compose up -d
-	./init-localstack.sh
+# 🚀 Pipeline completo
+all: infra build deploy run test
 
-# ======================
-# 2️⃣ Compilar proyectos
-# ======================
+# --------------------------------------------
+# 1️⃣ Infraestructura (LocalStack)
+# --------------------------------------------
+infra:
+	@echo "🔥 [1/5] Levantando infraestructura LocalStack..."
+	@chmod +x $(INFRA_SCRIPT)
+	@$(INFRA_SCRIPT)
+
+# --------------------------------------------
+# 2️⃣ Build completo
+# --------------------------------------------
 build:
-	@echo "🔧 Compilando QAPI_masiva..."
-	cd $(MASIVA_DIR) && mvn clean package -DskipTests
-	@echo "🔧 Compilando QAPI_worker..."
-	cd $(WORKER_DIR) && mvn clean package -DskipTests
+	@echo "🔧 [2/5] Compilando servicios Java..."
+	@chmod +x $(BUILD_SCRIPT)
+	@$(BUILD_SCRIPT)
 
-# ======================
-# 3️⃣ Ejecutar JARs
-# ======================
+# --------------------------------------------
+# 3️⃣ Crear colas/tables/config
+# --------------------------------------------
+deploy:
+	@echo "📦 [3/5] Deploy local (colas, tablas Dynamo, etc.)..."
+	@chmod +x $(DEPLOY_SCRIPT)
+	@$(DEPLOY_SCRIPT)
+
+# --------------------------------------------
+# 4️⃣ Ejecutar servicios
+# --------------------------------------------
 run:
-	@echo "🚀 Ejecutando QAPI_masiva..."
-	nohup java -jar $(MASIVA_JAR) --spring.profiles.active=dev > masiva.log 2>&1 & echo $$! > masiva.pid
-	@echo "🚀 Ejecutando QAPI_worker..."
-	nohup java -jar $(WORKER_JAR) --spring.profiles.active=dev > worker.log 2>&1 & echo $$! > worker.pid
-	@echo "✔ Servicios ejecutándose en background."
-	@echo "   - Masiva: PID `cat masiva.pid`"
-	@echo "   - Worker: PID `cat worker.pid`"
+	@echo "🚀 [4/5] Ejecutando QAPI (masiva + worker)..."
+	@chmod +x $(RUN_SCRIPT)
+	@$(RUN_SCRIPT)
+	@echo "✔ Servicios ejecutados correctamente"
 
-# ======================
-# 4️⃣ Ejecutar pruebas
-# ======================
-test e2e:
-	@echo "🧪 Ejecutando prueba E2E..."
-	./test-e2e.sh
+# --------------------------------------------
+# 5️⃣ Tests E2E
+# --------------------------------------------
+test:
+	@echo "🧪 [5/5] Ejecutando pruebas End-To-End..."
+	@chmod +x $(TEST_SCRIPT)
+	@$(TEST_SCRIPT)
 
-# ======================
-# DynamoDB Helpers
-# ======================
+# ============================================
+# UTILIDADES
+# ============================================
+
+logs:
+	@echo "📄 Logs de Masiva (amarillo):"
+	@echo ""
+	@tail -f QAPI_masiva/app.log | sed 's/^/\x1b[33m[MASIVA]\x1b[0m /' & \
+	tail -f QAPI_worker/app.log | sed 's/^/\x1b[36m[WORKER]\x1b[0m /'
+
+
+
 dynamo1:
-	aws --endpoint-url=http://localhost:4566 dynamodb scan --table-name InfoRequest | jq '.Items'
+	aws --endpoint-url=http://localhost:4566 --region us-east-1 dynamodb scan --table-name InfoRequest | jq '.Items'
 
 dynamo2:
-	aws --endpoint-url=http://localhost:4566 dynamodb scan --table-name InfoRequestProcessing | jq '.Items'
+	aws --endpoint-url=http://localhost:4566 --region us-east-1 dynamodb scan --table-name InfoRequestProcessing | jq '.Items'
 
-# ======================
-# Parar servicios
-# ======================
+sqs:
+	aws --endpoint-url=http://localhost:4566 sqs list-queues | jq
+
+# ============================================
+# STOP & CLEAN
+# ============================================
+
 stop:
-	@echo "🛑 Finalizando procesos..."
+	@echo "🛑 Deteniendo QAPI..."
 	@if [ -f masiva.pid ]; then kill `cat masiva.pid` || true; rm masiva.pid; fi
 	@if [ -f worker.pid ]; then kill `cat worker.pid` || true; rm worker.pid; fi
 	@echo "🧹 Deteniendo LocalStack..."
-	docker-compose down
+	docker compose down || true
 
-# ======================
-# Limpieza completa
-# ======================
+
 clean: stop
-	@echo "🧼 Borrando logs y builds..."
-	rm -f masiva.log worker.log
-	cd $(MASIVA_DIR) && mvn clean
-	cd $(WORKER_DIR) && mvn clean
+	@echo "🧼 Limpiando proyecto..."
+	@rm -f masiva.log worker.log
+	@rm -f masiva.pid worker.pid
+	@echo "✔ Limpieza realizada."
