@@ -33,6 +33,10 @@ build/
 .vscode/
 
 
-## Proyect ##
-.env.local
-test.txt
+# Ignorar carpetas de Terraform locales y binarios
+scripts/infra/terraform/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+
+scripts/infra/terraform/.terraform/

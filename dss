@@ -1,0 +1,23 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (]8;;file://BOG-LAP-OPS-208/usr/lib/systemd/system/docker.service\/usr/lib/systemd/system/docker.service]8;;\; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Wed 2025-11-19 09:55:11 -05; 1h 49min ago
+ Invocation: 9ca56270cfb54dc19d2b87d686955a0b
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: ]8;;https://docs.docker.com\https://docs.docker.com]8;;\
+   Main PID: 2662 (dockerd)
+      Tasks: 18
+     Memory: 96M (peak: 101M)
+        CPU: 1.224s
+     CGroup: /system.slice/docker.service
+             └─[0;38;5;245m2662 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock[0m
+
+nov 19 09:55:10 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:10.483621277-05:00" level=info msg="Creating a containerd client" address=/run/containerd/containerd.sock timeout=1m0s
+nov 19 09:55:10 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:10.528218283-05:00" level=info msg="[graphdriver] using prior storage driver: overlay2"
+nov 19 09:55:10 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:10.533029006-05:00" level=info msg="Loading containers: start."
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.071282662-05:00" level=info msg="Loading containers: done."
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.097919302-05:00" level=info msg="Docker daemon" commit=f8215cc containerd-snapshotter=false storage-driver=overlay2 version=28.5.1
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.098260051-05:00" level=info msg="Initializing buildkit"
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.108695183-05:00" level=info msg="Completed buildkit initialization"
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.112571884-05:00" level=info msg="Daemon has completed initialization"
+nov 19 09:55:11 BOG-LAP-OPS-208 dockerd[2662]: time="2025-11-19T09:55:11.112629913-05:00" level=info msg="API listen on /run/docker.sock"
+nov 19 09:55:11 BOG-LAP-OPS-208 systemd[1]: Started docker.service - Docker Application Container Engine.

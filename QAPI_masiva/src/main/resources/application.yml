@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: "QAPI_FacturacionMasiva"
+    profiles:
+        active: "dev"
+    devtools:
+        restart:
+            enabled: false
+logging:
+    level:
+        org:
+            springframework:
+                security: "DEBUG"
+                web: "DEBUG"

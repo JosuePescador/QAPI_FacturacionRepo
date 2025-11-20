@@ -1,0 +1,286 @@
+════════════════════════════════════════════════════════════════════════════════
+                       RESUMEN: CÓMO EJECUTAR EL SISTEMA
+════════════════════════════════════════════════════════════════════════════════
+
+📋 RESUMEN EJECUTIVO
+────────────────────────────────────────────────────────────────────────────────
+
+Tu sistema es una API REST de Facturación Masiva con:
+  • Spring Boot 3.4.2 (Java 17)
+  • AWS SQS FIFO (encolar facturas)
+  • AWS DynamoDB (guardar info)
+  • Keycloak OAuth2 (autenticación)
+  • Swagger/OpenAPI (documentación)
+
+════════════════════════════════════════════════════════════════════════════════
+
+⚡ OPCIÓN MÁS RÁPIDA (2-3 minutos)
+────────────────────────────────────────────────────────────────────────────────
+
+  Terminal 1: Compilar y ejecutar
+  ───────────────────────────────────
+  cd /home/joseu_pescado/Descargas/QAPI_FacturacionMasiva
+  ./run.sh
+  [Presiona 1 para: Compilar y Ejecutar]
+
+  Verás en pantalla:
+    ✓ BUILD SUCCESS
+    ✓ Tomcat started on port(s): 8080
+    ✓ Started QapiFacturacionMasivaApplication
+
+
+  Terminal 2: Verificar que funciona
+  ────────────────────────────────────
+  # Verificar estado
+  curl http://localhost:8080/actuator/health
+
+  Resultado esperado:
+  {
+    "status": "UP"
+  }
+
+  # Abrir documentación en navegador
+  http://localhost:8080/docs
+
+════════════════════════════════════════════════════════════════════════════════
+
+🎯 PASOS DETALLADOS (Si prefieres manual)
+────────────────────────────────────────────────────────────────────────────────
+
+  PASO 1: Verificar Java
+  ──────────────────────
+  java -version
+
+  Debe mostrar:
+    openjdk version "17.x.x" o superior
+
+
+  PASO 2: Compilar el proyecto
+  ──────────────────────────────
+  cd /home/joseu_pescado/Descargas/QAPI_FacturacionMasiva
+  ./mvnw clean package -DskipTests
+
+  Tiempo: 2-5 minutos
+  Resultado: target/QAPI_FacturacionMasiva-1.1.1.jar
+
+
+  PASO 3: Ejecutar la aplicación
+  ──────────────────────────────
+  java -jar target/QAPI_FacturacionMasiva-1.1.1.jar \
+    --spring.profiles.active=dev
+
+  La app está lista cuando veas:
+    "[main] INFO c.n.q.QapiFacturacionMasivaApplication - Started..."
+
+
+  PASO 4: Verificar endpoints
+  ────────────────────────────
+  
+  En otra terminal:
+
+    # Health Check
+    curl http://localhost:8080/actuator/health
+
+    # Ver documentación (en navegador)
+    http://localhost:8080/docs
+
+    # Ver info del app
+    curl http://localhost:8080/actuator/info
+
+════════════════════════════════════════════════════════════════════════════════
+
+🧪 PRUEBAS SIMPLES (Sin AWS)
+────────────────────────────────────────────────────────────────────────────────
+
+  Test 1: Health Check
+  ────────────────────
+  curl -X GET "http://localhost:8080/actuator/health" \
+    -H "Content-Type: application/json"
+
+  ✓ Respuesta: {"status":"UP"}
+
+
+  Test 2: Ver configuración activa
+  ──────────────────────────────────
+  curl -X GET "http://localhost:8080/actuator/env" \
+    -H "Content-Type: application/json" | jq '.propertySources[] | select(.name | contains("application"))'
+
+  ✓ Debe mostrar properties del perfil 'dev'
+
+
+  Test 3: Ver API disponibles
+  ─────────────────────────────
+  curl -X GET "http://localhost:8080/actuator/mappings" | jq
+
+  ✓ Debe mostrar todos los endpoints del sistema
+
+════════════════════════════════════════════════════════════════════════════════
+
+📞 PROBAR ENDPOINT DE FACTURACIÓN (Requiere SQS configurado)
+────────────────────────────────────────────────────────────────────────────────
+
+  IMPORTANTE: Necesitas credenciales AWS para que funcione SQS/DynamoDB:
+
+  export AWS_ACCESS_KEY_ID="tu_access_key"
+  export AWS_SECRET_ACCESS_KEY="tu_secret_key"
+  export AWS_REGION="us-east-1"
+
+
+  Test: Enviar Nota de Débito
+  ────────────────────────────
+  curl -X POST "http://localhost:8080/facturacion-masiva/nota-debito" \
+    -H "Content-Type: application/json" \
+    -d '[{
+      "tercero": {
+        "claseIdentificacion": "CC",
+        "numeroIdentificacion": 1234567890,
+        "descripcionAuxiliar": "Test Cliente"
+      },
+      "conceptoPrincipal": [{
+        "conceptoFacturacion": "Servicio",
+        "cantidadUnidades": "1",
+        "valorUnitario": "100000"
+      }]
+    }]'
+
+  ✓ Respuesta esperada (si AWS está configurado):
+    {"mensaje_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}
+
+════════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTACIÓN DISPONIBLE
+────────────────────────────────────────────────────────────────────────────────
+
+  En el directorio del proyecto:
+
+    README_RAPIDO.md
+    ├─ Inicio rápido
+    ├─ Requisitos
+    ├─ Arquitectura
+    └─ Próximos pasos
+
+    GUIA_EJECUCION.md
+    ├─ 9 pasos detallados
+    ├─ Configuración AWS
+    ├─ Autenticación Keycloak
+    ├─ Monitoreo y logs
+    └─ Solución de problemas
+
+    EJEMPLOS_API.md
+    ├─ Ejemplos cURL
+    ├─ Testing
+    ├─ Validaciones
+    └─ Scripts Bash
+
+    INICIO_RAPIDO.txt
+    └─ Esta guía visual
+
+════════════════════════════════════════════════════════════════════════════════
+
+❌ ERRORES COMUNES Y SOLUCIONES
+────────────────────────────────────────────────────────────────────────────────
+
+  ❌ "java: command not found"
+     ✅ Java no está instalado
+     ✅ Solución: apt-get install openjdk-17-jdk-headless
+
+
+  ❌ "Port 8080 already in use"
+     ✅ Otro servicio está usando el puerto
+     ✅ Solución: java -jar ... --server.port=9090
+
+
+  ❌ "BUILD FAILURE"
+     ✅ Error de compilación
+     ✅ Solución: ./mvnw clean (limpia) y reintentar
+
+
+  ❌ "AWS Exception: Unable to load credentials"
+     ✅ Credenciales AWS no configuradas
+     ✅ Solución: export AWS_ACCESS_KEY_ID=... (solo si usas SQS)
+
+
+  ❌ "Connection refused"
+     ✅ La app no está corriendo
+     ✅ Solución: Verifica que el JAR esté ejecutándose
+
+════════════════════════════════════════════════════════════════════════════════
+
+🎯 CHECKLIST DE FUNCIONAMIENTO
+────────────────────────────────────────────────────────────────────────────────
+
+  ☐ Java 17+:           java -version → muestra "17.x"
+  ☐ Compilación:        ./mvnw clean package → BUILD SUCCESS
+  ☐ JAR generado:       ls target/QAPI_FacturacionMasiva-1.1.1.jar
+  ☐ Aplicación inicia:  java -jar ... → "Started... in X seconds"
+  ☐ Health Check:       curl localhost:8080/actuator/health → {"status":"UP"}
+  ☐ Swagger UI:         http://localhost:8080/docs → Página carga
+  ☐ Logs sin ERROR:     grep ERROR en los logs → sin resultados
+
+  Si todos están ✓: ¡El sistema funciona correctamente!
+
+════════════════════════════════════════════════════════════════════════════════
+
+🚀 PRÓXIMOS PASOS
+────────────────────────────────────────────────────────────────────────────────
+
+  1. Leer documentación:
+     cat GUIA_EJECUCION.md
+
+  2. Probar endpoints:
+     cat EJEMPLOS_API.md
+
+  3. Configurar AWS (si necesita SQS):
+     export AWS_ACCESS_KEY_ID="..."
+
+  4. Explorar Swagger UI:
+     http://localhost:8080/docs
+
+  5. Ver logs:
+     tail -f nohup.out | grep -E "INFO|ERROR"
+
+  6. Deploy a producción:
+     cd uca-devs-facturacionmasiva/
+     bash cf-ecs.deploy.sh
+
+════════════════════════════════════════════════════════════════════════════════
+
+ℹ️  INFORMACIÓN TÉCNICA
+────────────────────────────────────────────────────────────────────────────────
+
+  Versión:          1.1.1
+  Java:             17 (OpenJDK)
+  Spring Boot:      3.4.2
+  Maven:            3.6+
+  Perfil dev:       Desarrollo local con OAuth2 mock
+  Perfil prod:      Producción con Keycloak real
+  Puerto default:   8080
+  DB:               DynamoDB (AWS)
+  Cola de mensajes: SQS FIFO (AWS)
+  Autenticación:    OAuth2 Keycloak
+  API Docs:         Swagger/OpenAPI 3.0
+
+════════════════════════════════════════════════════════════════════════════════
+
+✅ RESUMEN
+
+Tu sistema QAPI FacturacionMasiva v1.1.1 es una aplicación Spring Boot que:
+
+  1. Recibe solicitudes de facturación masiva vía REST API
+  2. Las encola en AWS SQS FIFO
+  3. Las persiste en AWS DynamoDB
+  4. Proporciona documentación automática con Swagger
+
+Para EJECUTAR:
+  ./run.sh → selecciona opción 1
+
+Para VERIFICAR:
+  curl http://localhost:8080/actuator/health
+
+Para DOCUMENTACIÓN:
+  http://localhost:8080/docs
+
+════════════════════════════════════════════════════════════════════════════════
+
+Última actualización: 13 de noviembre de 2025
+Autor: Sistema Automático de Generación de Documentación
