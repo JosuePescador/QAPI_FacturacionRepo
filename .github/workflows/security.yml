@@ -1,16 +1,16 @@
 name: Security & Dependency Check
-
+# Runs on main, develop, actions + weekly schedule
 on:
   push:
     branches:
       - main
       - develop
-      - modules
+      - actions
   pull_request:
     branches:
       - main
       - develop
-      - modules
+      - actions
   schedule:
     - cron: '0 0 * * 0'  # Weekly on Sundays
 

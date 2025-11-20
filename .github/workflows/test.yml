@@ -1,16 +1,18 @@
 name: Test Environment CI
-
+# Triggers on push to: main, develop, scripts, actions
 on:
   push:
     branches:
       - main
       - develop
       - scripts
+      - actions
   pull_request:
     branches:
       - main
       - develop
       - scripts
+      - actions
 
 jobs:
   build-and-test:
