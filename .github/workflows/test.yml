@@ -96,7 +96,7 @@ jobs:
 
       - name: Run End-to-End Tests
         run: |
-          chmod +x test-e2e.sh
+          chmod +x ./scripts/test/test-e2e.sh
           ./scripts/test/test-e2e.sh
         env:
           KEYCLOAK_URL: ${{ secrets.KEYCLOAK_URL }}

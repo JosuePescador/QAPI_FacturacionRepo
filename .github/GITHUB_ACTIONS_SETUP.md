@@ -124,7 +124,7 @@ Si ves errores de timeout en LocalStack, aumenta el tiempo de espera en el workf
 
 Si el token JWT no se obtiene:
 - Verifica que los secretos sean correctos
-- Asegúrate que el endpoint de Keycloak sea accesible desde GitHub Actions
+- Asegúrate que el endpoint de Keycloak sea accesible desde GitHub Actions.
 
 ### Pruebas lentas
 

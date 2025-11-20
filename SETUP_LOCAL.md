@@ -155,7 +155,7 @@ Started QapiFacturacionMasivaWorkerApplication in X.XXX seconds
 En una **tercera terminal**, ejecuta el script de prueba:
 
 ```bash
-cd /home/adminblend/Escritorio/Blend/ucaldas/QAPI_FacturacionRepo
+cd /home/joseu_pescado/Descargas/QAPI_FacturacionRepo
 chmod +x test-e2e.sh
 ./test-e2e.sh
 ```
