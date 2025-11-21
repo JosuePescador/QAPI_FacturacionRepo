@@ -139,23 +139,29 @@ echo ""
 
 # 4. Verificar mensaje en SQS
 echo -e "${YELLOW}→${NC} Verificando mensaje en cola SQS..."
-QUEUE_URL=$(aws --endpoint-url=$LOCALSTACK_URL sqs get-queue-url \
-    --queue-name uca-test-factmasiva-sqs.fifo \
-    --output text 2>/dev/null)
 
-MESSAGES=$(aws --endpoint-url=$LOCALSTACK_URL sqs receive-message \
-    --queue-url "$QUEUE_URL" \
-    --max-number-of-messages 1 \
-    --wait-time-seconds 2 2>/dev/null)
+AWS_LOCAL="aws --endpoint-url=${LOCALSTACK_URL} --region us-east-1"
 
-if echo "$MESSAGES" | grep -q "Messages"; then
-    echo -e "${GREEN}✓${NC} Mensaje encontrado en cola SQS"
-    echo -e "${CYAN}Contenido del mensaje:${NC}"
-    echo "$MESSAGES" | jq -r '.Messages[0].Body' | jq '.'
-else
-    echo -e "${YELLOW}⚠${NC} No se encontraron mensajes en la cola (puede que ya se procesó)"
+QUEUE_URL=$($AWS_LOCAL sqs get-queue-url \
+  --queue-name uca-test-factmasiva-sqs.fifo \
+  --query 'QueueUrl' \
+  --output text 2>/dev/null || echo "")
+
+if [ -z "$QUEUE_URL" ] || [ "$QUEUE_URL" = "None" ]; then
+  echo -e "${RED}✗ No se pudo obtener la URL de la cola SQS 'uca-test-factmasiva-sqs.fifo'${NC}"
+  echo -e "${YELLOW}Colas actuales en LocalStack:${NC}"
+  $AWS_LOCAL sqs list-queues || true
+  exit 1
 fi
-echo ""
+
+echo -e "${CYAN}Queue URL:${NC} $QUEUE_URL"
+
+# Opcional: leer mensajes de la cola
+$AWS_LOCAL sqs receive-message \
+  --queue-url "$QUEUE_URL" \
+  --max-number-of-messages 10 \
+  --wait-time-seconds 3 | jq '.'
+
 
 # 5. Verificar en DynamoDB #1 (InfoRequest)
 echo -e "${YELLOW}→${NC} Verificando registro en DynamoDB #1 (InfoRequest)..."

@@ -1,0 +1,100 @@
+name: Deploy to Test Environment
+
+on:
+  push:
+    branches:
+      - develop
+      - modules
+      - actions
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test
+          - staging
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build QAPI_masiva
+        run: |
+          cd QAPI_masiva
+          mvn clean package -DskipTests -P test
+          cd ..
+
+      - name: Build QAPI_worker
+        run: |
+          cd QAPI_worker
+          mvn clean package -DskipTests -P test
+          cd ..
+
+      - name: Create deployment artifacts
+        run: |
+          mkdir -p deployment
+          cp QAPI_masiva/target/QAPI_FacturacionMasiva-1.1.1.jar deployment/ || true
+          cp QAPI_worker/target/QAPI_FacturacionMasivaWorker-1.1.0.jar deployment/ || true
+          cp docker-compose.yml deployment/ || true
+          cp init-localstack.sh deployment/ || true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-deployment
+          path: deployment/
+
+      - name: Deploy to Test Server (conditional inside)
+        env:
+          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+          TEST_SERVER_USER: ${{ secrets.TEST_SERVER_USER }}
+          TEST_SERVER_KEY: ${{ secrets.TEST_SERVER_KEY }}
+        run: |
+          if [ -z "${TEST_SERVER_HOST}" ]; then
+            echo "TEST_SERVER_HOST not configured, skipping remote deploy"
+            exit 0
+          fi
+          mkdir -p ~/.ssh
+          echo "${TEST_SERVER_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${TEST_SERVER_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true
+          scp -r deployment/* ${TEST_SERVER_USER}@${TEST_SERVER_HOST}:/opt/qapi/test/ || true
+          ssh ${TEST_SERVER_USER}@${TEST_SERVER_HOST} << 'EOF'
+            set -e
+            cd /opt/qapi/test || exit 0
+            docker-compose down || true
+            docker-compose up -d || true
+            sleep 10
+            bash init-localstack.sh || true
+          EOF
+
+      - name: Smoke Tests (local check)
+        run: |
+          echo "Waiting for local services to be ready..."
+          sleep 10
+          curl -fs http://localhost:8080/actuator/health || echo "QAPI_masiva not healthy (it may be remote)"
+          curl -fs http://localhost:8081/actuator/health || echo "QAPI_worker not healthy (it may be remote)"
+
+      - name: Notify deployment
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✓ Deploy workflow completed (check logs for deploy or skip)"
+          else
+            echo "✗ Deploy workflow failed"
+          fi
+          curl -f http://localhost:8080/actuator/health || exit 1

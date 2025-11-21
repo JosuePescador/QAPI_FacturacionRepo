@@ -91,3 +91,7 @@ localstack-data/infra/
 localstack-data/tmp/
 .localstack/
 ########################
+
+.venv/
+__pycache__/
+*.pyc
