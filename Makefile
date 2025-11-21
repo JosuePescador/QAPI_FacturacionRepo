@@ -139,6 +139,3 @@ clean: stop
 	@echo "🧼 Limpiando archivos..."
 	@rm -f masiva.log worker.log masiva.pid worker.pid
 	@echo "✔ Limpieza completa"
-
-
-        --table-name InfoRequest \
