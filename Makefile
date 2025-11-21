@@ -79,7 +79,9 @@ test:
 
 verify:
 	@echo "🔍 Verificando salud de LocalStack..."
-	@curl -s http://localhost:4566/health | jq '.services' || true
+	@curl -s http://localhost:4566/_localstack/health | jq '.services' 2>/dev/null || \
+    echo "⚠️ LocalStack aún no listo o endpoint no disponible"
+
 
 	@echo "\n📌 Verificando Dynamo1..."
 	$(AWS) dynamodb describe-table --table-name InfoRequest >/dev/null 2>&1 && \
@@ -138,3 +140,5 @@ clean: stop
 	@rm -f masiva.log worker.log masiva.pid worker.pid
 	@echo "✔ Limpieza completa"
 
+
+        --table-name InfoRequest \
