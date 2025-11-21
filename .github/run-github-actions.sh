@@ -57,7 +57,7 @@ print_error() {
 validate_workflows() {
     print_header "Validando archivos de workflows"
     
-    local workflows=("test.yml"  "deploy-test.yml" )
+    local workflows=("test.yml" "code-quality.yml" "deploy-test.yml" "security.yml")
     local missing=0
     
     for wf in "${workflows[@]}"; do

@@ -1,0 +1,100 @@
+name: Security & Dependency Check
+# Runs on main, develop, actions + weekly schedule
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - actions
+  pull_request:
+    branches:
+      - main
+      - develop
+      - actions
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sundays
+  workflow_dispatch: {}
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Check dependencies for vulnerabilities - QAPI_masiva
+        run: |
+          cd QAPI_masiva || exit 0
+          mvn org.owasp:dependency-check-maven:check || true
+          cd -
+
+      - name: Check dependencies for vulnerabilities - QAPI_worker
+        run: |
+          cd QAPI_worker || exit 0
+          mvn org.owasp:dependency-check-maven:check || true
+          cd -
+
+      - name: Upload dependency check reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-reports
+          path: |
+            QAPI_masiva/target/dependency-check-report.html
+            QAPI_worker/target/dependency-check-report.html
+
+  code-scanning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Build and analyze with SonarCloud (optional)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          # SonarCloud is optional; fail-safe so workflow won't fail if not configured
+          if [ -n "${{ secrets.SONAR_TOKEN }}" ]; then
+            cd QAPI_masiva || exit 0
+            mvn -B clean verify sonar:sonar \
+              -Dsonar.projectKey=qapi_facturacion_masiva \
+              -Dsonar.projectName="QAPI Facturación Masiva" \
+              -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
+              -Dsonar.host.url=https://sonarcloud.io || true
+            cd -
+            cd QAPI_worker || exit 0
+            mvn -B clean verify sonar:sonar \
+              -Dsonar.projectKey=qapi_facturacion_worker \
+              -Dsonar.projectName="QAPI Facturación Worker" \
+              -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
+              -Dsonar.host.url=https://sonarcloud.io || true
+            cd -
+          else
+            echo "SonarCloud token not configured, skipping Sonar analysis"
+          fi
