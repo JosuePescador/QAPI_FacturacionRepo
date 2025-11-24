@@ -123,22 +123,24 @@ jobs:
             exit 1
           fi
           
-          # Check QAPI_worker
-          echo "Checking QAPI_worker (port 8081)..."
-          for i in {1..30}; do
-            WORKER_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8081/actuator/health || echo "000")
-            if [ "$WORKER_STATUS" = "200" ]; then
-              echo "✅ QAPI_worker is healthy"
-              break
-            fi
-            echo "  Waiting for QAPI_worker... ($i/30) HTTP $WORKER_STATUS"
-            sleep 3
-          done
+          # Check QAPI_worker (es un SQS listener, no tiene endpoints REST)
+          echo "Checking QAPI_worker (SQS listener)..."
           
-          if [ "$WORKER_STATUS" != "200" ]; then
-            echo "⚠️  QAPI_worker may not be healthy (HTTP $WORKER_STATUS)"
+          # Verificar que el proceso arrancó correctamente buscando el mensaje de inicio
+          if grep -q "Started QapiFacturacionMasivaWorkerApplication" worker.log; then
+            echo "✅ QAPI_worker started successfully"
+            
+            # Verificar que el SQS listener container se inicializó
+            if grep -q "sqsListenerEndpointContainer.*started" worker.log; then
+              echo "✅ QAPI_worker SQS listener container is running"
+            else
+              echo "⚠️  SQS listener container may not be started yet"
+            fi
+          else
+            echo "❌ QAPI_worker failed to start"
             echo "📜 Last 50 lines of worker.log:"
             tail -50 worker.log || true
+            exit 1
           fi
           
           # Check LocalStack
