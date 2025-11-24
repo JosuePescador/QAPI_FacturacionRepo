@@ -31,35 +31,7 @@ export AWS_ACCESS_KEY_ID=test
 export AWS_SECRET_ACCESS_KEY=test
 export AWS_DEFAULT_REGION=us-east-1
 
-# 1. Verificar que los servicios estén corriendo
-echo -e "${YELLOW}→${NC} Verificando servicios..."
 
-# LocalStack
-if curl -s $LOCALSTACK_URL/_localstack/health > /dev/null 2>&1; then
-    echo -e "${GREEN}✓${NC} LocalStack está corriendo (puerto 4566)"
-else
-    echo -e "${RED}✗${NC} LocalStack NO está corriendo. Ejecuta: docker-compose up -d"
-    exit 1
-fi
-
-# QAPI_masiva
-if curl -s $MASIVA_URL/actuator/health > /dev/null 2>&1; then
-    echo -e "${GREEN}✓${NC} QAPI_masiva está corriendo (puerto 8080)"
-else
-    echo -e "${RED}✗${NC} QAPI_masiva NO está corriendo"
-    echo -e "${YELLOW}  Ejecuta en otra terminal:${NC}"
-    echo -e "${CYAN}  cd QAPI_masiva && java -jar target/QAPI_FacturacionMasiva-1.1.1.jar --spring.profiles.active=dev${NC}"
-    exit 1
-fi
-
-# QAPI_worker
-if curl -s $WORKER_URL/actuator/health > /dev/null 2>&1; then
-    echo -e "${GREEN}✓${NC} QAPI_worker está corriendo (puerto 8081)"
-else
-    echo -e "${YELLOW}⚠${NC} QAPI_worker NO está corriendo (opcional para esta prueba)"
-fi
-
-echo ""
 
 # 2. Obtener Token JWT
 echo -e "${YELLOW}→${NC} Obteniendo token JWT..."
