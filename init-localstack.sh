@@ -75,7 +75,7 @@ echo ""
 
 # 5. Listar recursos creados
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║  Recursos creados en LocalStack                           ║${NC}"
+echo -e "${BLUE}║  Recursos creados en LocalStack.                           ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
