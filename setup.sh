@@ -76,7 +76,7 @@ echo -e "${BLUE}║  Paso 5: Tests end-to-end                                  �
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-"$BASE_DIR/scripts/test/test-local.sh"
+"$BASE_DIR/scripts/test/test-e2e.sh"
 echo ""
 
 echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"

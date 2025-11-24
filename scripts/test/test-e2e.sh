@@ -63,18 +63,31 @@ echo ""
 
 # 2. Obtener Token JWT
 echo -e "${YELLOW}→${NC} Obteniendo token JWT..."
-TOKEN=$(curl -s -X POST "$KEYCLOAK_URL" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=client_credentials" \
-  -d "client_id=apifactmasiva" \
-  -d "client_secret=2maYCBOiMthTcAWeBxc3DWvZ4kpcIYNV" | jq -r '.access_token')
 
-if [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; then
-    echo -e "${RED}✗${NC} Error obteniendo token JWT"
-    exit 1
+# Por defecto: usar token falso (modo local)
+if [ "${USE_FAKE_TOKEN:-true}" = "true" ]; then
+    echo -e "${YELLOW}  Usando TOKEN falso para entorno local (USE_FAKE_TOKEN=true por defecto)${NC}"
+    TOKEN="fake-local-token"
+else
+    TOKEN_RESPONSE=$(curl -s -X POST "$KEYCLOAK_URL" \
+      -H "Content-Type: application/x-www-form-urlencoded" \
+      -d "grant_type=client_credentials" \
+      -d "client_id=apifactmasiva" \
+      -d "client_secret=2maYCBOiMthTcAWeBxc3DWvZ4kpcIYNV")
+
+    echo "------------------------------------"
+    echo "Respuesta cruda de Keycloak:"
+    echo "$TOKEN_RESPONSE"
+    echo "------------------------------------"
+
+    # Validar que sea JSON antes de usar jq
+    if ! echo "$TOKEN_RESPONSE" | jq . >/dev/null 2>&1; then
+        echo -e "${RED}✗${NC} La respuesta de Keycloak NO es JSON válido o no tiene el formato esperado"
+        exit 5
+    fi
+
+    TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.access_token')
 fi
-echo -e "${GREEN}✓${NC} Token JWT obtenido"
-echo ""
 
 # 3. Enviar solicitud de facturación
 echo -e "${YELLOW}→${NC} Enviando solicitud de facturación masiva..."
