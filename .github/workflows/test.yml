@@ -1,129 +1,67 @@
-name: Test Environment CI
-# Triggers on push to: main, develop, scripts, actions
+name: Local E2E - QAPI Facturación Masiva
+ 
 on:
   push:
     branches:
       - main
       - develop
-      - scripts
+      - modules
       - actions
   pull_request:
     branches:
       - main
       - develop
-      - scripts
       - actions
   workflow_dispatch: {}
-
+ 
 jobs:
-  build-and-test:
+  local-e2e:
+    name: Local E2E (LocalStack + Terraform + Setup)
     runs-on: ubuntu-latest
-    
-    # Note: Infrastructure (LocalStack + Terraform) is provisioned using repository scripts
-    # `scripts/infra-local.sh` and `scripts/iac-local.sh`. We install Terraform and run
-    # the IaC scripts here instead of relying on the runner `services` block so the
-    # workflow follows the repository's established setup.
-
+    timeout-minutes: 45
+ 
+    env:
+      # Credenciales falsas para LocalStack
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+ 
+      # Por defecto usamos token falso en los tests E2E
+      USE_FAKE_TOKEN: "true"
+ 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Java
+ 
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-      - name: Configure AWS credentials for LocalStack
-        run: |
-          echo "AWS_ACCESS_KEY_ID=test" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=test" >> $GITHUB_ENV
-          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
-
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v2
+ 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: '1.5.7'
-
-      - name: Make infra scripts executable
+          terraform_wrapper: false
+ 
+      - name: Mostrar versiones
         run: |
-          chmod +x scripts/infra-local.sh || true
-          chmod +x scripts/iac-local.sh || true
-
-      - name: Provision local infra (Docker + LocalStack)
+          java -version
+          terraform -version
+          docker --version
+ 
+      - name: Ejecutar setup local completo (infra + IaC + build + deploy + tests)
         run: |
-          # infra-local.sh should start LocalStack (docker-compose) and related containers
-          ./scripts/infra-local.sh
-
-      - name: Apply IaC (Terraform) against LocalStack
-        run: |
-          # iac-local.sh should run terraform init/apply in infra/terraform
-          ./scripts/iac-local.sh
-
-      - name: Wait for LocalStack to be ready
-        run: |
-          # Wait until LocalStack health endpoint is ready (increase timeout if needed)
-          timeout 120 bash -c 'until curl -f http://localhost:4566/_localstack/health; do sleep 2; done'
-
-      - name: Build QAPI_masiva
-        run: |
-          cd QAPI_masiva
-          mvn clean package -DskipTests
-          cd ..
-
-      - name: Build QAPI_worker
-        run: |
-          cd QAPI_worker
-          mvn clean package -DskipTests
-          cd ..
-
-      - name: Run QAPI_masiva in background
-        run: |
-          cd QAPI_masiva
-          java -jar target/QAPI_FacturacionMasiva-1.1.1.jar --spring.profiles.active=dev &
-          cd ..
-          sleep 15
-          curl http://localhost:8080/actuator/health || true
-
-      - name: Run QAPI_worker in background
-        run: |
-          cd QAPI_worker
-          java -jar target/QAPI_FacturacionMasivaWorker-1.1.0.jar --spring.profiles.active=dev &
-          cd ..
-          sleep 15
-          curl http://localhost:8081/actuator/health || true
-
-      - name: Run End-to-End Tests
-        run: |
-          chmod +x test-e2e.sh
-          ./scripts/test/test-e2e.sh
-        env:
-          KEYCLOAK_URL: ${{ secrets.KEYCLOAK_URL }}
-          KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
-          KEYCLOAK_CLIENT_SECRET: ${{ secrets.KEYCLOAK_CLIENT_SECRET }}
-
-      - name: Verify DynamoDB data
-        run: |
-          echo "=== InfoRequest Table ==="
-          aws --endpoint-url=http://localhost:4566 dynamodb scan \
-            --table-name InfoRequest --region us-east-1 | jq '.Items'
-          
-          echo ""
-          echo "=== InfoRequestProcessing Table ==="
-          aws --endpoint-url=http://localhost:4566 dynamodb scan \
-            --table-name InfoRequestProcessing --region us-east-1 | jq '.Items'
-
-      - name: Upload test results
+          chmod +x setup.sh
+          ./setup.sh
+ 
+      - name: Subir logs como artefacto
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: qapi-local-e2e-logs
           path: |
-            QAPI_masiva/target/
-            QAPI_worker/target/
-
-      - name: Notify on failure
-        if: failure()
-        run: |
-          echo "::error::Test environment CI failed. Check logs above."
+            log-masiva.out
+            log-worker.out
+          if-no-files-found: ignore
+ 

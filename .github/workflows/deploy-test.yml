@@ -136,7 +136,7 @@ jobs:
             fi
             
             echo ""
-            echo "🎉 All critical services are healthy!"
+            echo "🎉 All services are healthy!"
           EOF
 
       - name: Notify deployment
