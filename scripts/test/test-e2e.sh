@@ -1,13 +1,6 @@
 #!/bin/bash
-
-################################################################################
-# Script de Prueba End-to-End - QAPI Facturación Masiva
-# Prueba el flujo completo: API → SQS → Worker → DynamoDB
-################################################################################
-
 set -e
 
-# Colores
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -20,46 +13,89 @@ echo -e "${BLUE}║  Prueba End-to-End: QAPI Facturación Masiva               �
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-# Configuración
 MASIVA_URL="http://localhost:8080"
 WORKER_URL="http://localhost:8081"
 LOCALSTACK_URL="http://localhost:4566"
 KEYCLOAK_URL="https://iam.ia.ucaldas.nuvu.cc/realms/factMasivaTest/protocol/openid-connect/token"
 
-# AWS LocalStack
-export AWS_ACCESS_KEY_ID=test
-export AWS_SECRET_ACCESS_KEY=test
-export AWS_DEFAULT_REGION=us-east-1
+export AWS_ACCESS_KEY_ID="test"
+export AWS_SECRET_ACCESS_KEY="test"
+export AWS_DEFAULT_REGION="us-east-1"
 
+###############################################################################
+# 1. Verificar que los servicios estén corriendo
+###############################################################################
+echo -e "${YELLOW}→${NC} Verificando servicios..."
 
+wait_for_service() {
+  local name="$1"
+  local url="$2"
+  local retries="${3:-20}"
+  local delay="${4:-3}"
 
+  echo -e "${YELLOW}  Esperando a que ${name} responda en ${url}...${NC}"
+  for i in $(seq 1 "$retries"); do
+    if curl -s "$url" > /dev/null 2>&1; then
+      echo -e "${GREEN}✓${NC} ${name} está corriendo"
+      return 0
+    fi
+    echo "    ...reintentando (${i}/${retries})"
+    sleep "$delay"
+  done
+
+  echo -e "${RED}✗${NC} ${name} NO está corriendo después de ${retries} intentos"
+  return 1
+}
+
+# LocalStack
+if curl -s "$LOCALSTACK_URL/_localstack/health" > /dev/null 2>&1; then
+  echo -e "${GREEN}✓${NC} LocalStack está corriendo (puerto 4566)"
+else
+  echo -e "${RED}✗${NC} LocalStack NO está corriendo. Revisa docker-compose / LocalStack"
+  exit 1
+fi
+
+# QAPI_masiva – aquí es donde evitamos el exit 7 en CI
+wait_for_service "QAPI_masiva" "$MASIVA_URL/actuator/health" || exit 1
+
+# QAPI_worker – opcional para la prueba
+if ! wait_for_service "QAPI_worker" "$WORKER_URL/actuator/health" 10 3; then
+  echo -e "${YELLOW}⚠${NC} QAPI_worker NO está corriendo (opcional para esta prueba)"
+fi
+
+echo ""
+
+###############################################################################
 # 2. Obtener Token JWT
+###############################################################################
 echo -e "${YELLOW}→${NC} Obteniendo token JWT..."
 
-# Por defecto: usar token falso (modo local)
-if [ "${USE_FAKE_TOKEN:-true}" = "true" ]; then
-    echo -e "${YELLOW}  Usando TOKEN falso para entorno local (USE_FAKE_TOKEN=true por defecto)${NC}"
-    TOKEN="fake-local-token"
+# Por defecto usamos token falso (entorno local / CI)
+USE_FAKE_TOKEN="${USE_FAKE_TOKEN:-true}"
+
+if [ "$USE_FAKE_TOKEN" = "true" ]; then
+  echo -e "${YELLOW}  Usando TOKEN falso para entorno local (USE_FAKE_TOKEN=true por defecto)${NC}"
+  TOKEN="fake-local-token"
 else
-    TOKEN_RESPONSE=$(curl -s -X POST "$KEYCLOAK_URL" \
-      -H "Content-Type: application/x-www-form-urlencoded" \
-      -d "grant_type=client_credentials" \
-      -d "client_id=apifactmasiva" \
-      -d "client_secret=2maYCBOiMthTcAWeBxc3DWvZ4kpcIYNV")
+  TOKEN_RESPONSE=$(curl -s -X POST "$KEYCLOAK_URL" \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "grant_type=client_credentials" \
+    -d "client_id=apifactmasiva" \
+    -d "client_secret=2maYCBOiMthTcAWeBxc3DWvZ4kpcIYNV")
 
-    echo "------------------------------------"
-    echo "Respuesta cruda de Keycloak:"
-    echo "$TOKEN_RESPONSE"
-    echo "------------------------------------"
+  echo "------------------------------------"
+  echo "Respuesta cruda de Keycloak:"
+  echo "$TOKEN_RESPONSE"
+  echo "------------------------------------"
 
-    # Validar que sea JSON antes de usar jq
-    if ! echo "$TOKEN_RESPONSE" | jq . >/dev/null 2>&1; then
-        echo -e "${RED}✗${NC} La respuesta de Keycloak NO es JSON válido o no tiene el formato esperado"
-        exit 5
-    fi
+  if ! echo "$TOKEN_RESPONSE" | jq . >/dev/null 2>&1; then
+    echo -e "${RED}✗${NC} La respuesta de Keycloak NO es JSON válido o no tiene el formato esperado"
+    exit 5
+  fi
 
-    TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.access_token')
+  TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.access_token')
 fi
+
 
 # 3. Enviar solicitud de facturación
 echo -e "${YELLOW}→${NC} Enviando solicitud de facturación masiva..."
