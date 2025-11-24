@@ -49,6 +49,13 @@ localstack-data/
 ########################
 *.pid
 
+# Archivos de logs
+*.log
+*.out
+log-*.out
+masiva.log
+worker.log
+
 ########################
 # Configuración secreta#
 ########################
