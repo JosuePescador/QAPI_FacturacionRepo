@@ -60,7 +60,7 @@ jobs:
       - name: Start LocalStack
         run: |
           echo "🚀 Starting LocalStack..."
-          docker-compose up -d localstack
+          docker compose up -d localstack
           sleep 10
           
           echo "⏳ Waiting for LocalStack to be ready..."
