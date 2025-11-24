@@ -57,87 +57,113 @@ jobs:
           name: test-deployment
           path: deployment/
 
-      - name: Deploy to Test Server (conditional inside)
-        env:
-          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
-          TEST_SERVER_USER: ${{ secrets.TEST_SERVER_USER }}
-          TEST_SERVER_KEY: ${{ secrets.TEST_SERVER_KEY }}
+      - name: Start LocalStack
         run: |
-          if [ -z "${TEST_SERVER_HOST}" ]; then
-            echo "TEST_SERVER_HOST not configured, skipping remote deploy"
-            exit 0
-          fi
-          mkdir -p ~/.ssh
-          echo "${TEST_SERVER_KEY}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${TEST_SERVER_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true
-          scp -r deployment/* ${TEST_SERVER_USER}@${TEST_SERVER_HOST}:/opt/qapi/test/ || true
-          ssh ${TEST_SERVER_USER}@${TEST_SERVER_HOST} << 'EOF'
-            set -e
-            cd /opt/qapi/test || exit 0
-            docker-compose down || true
-            docker-compose up -d || true
-            sleep 10
-            bash init-localstack.sh || true
-          EOF
+          echo "🚀 Starting LocalStack..."
+          docker-compose up -d localstack
+          sleep 10
+          
+          echo "⏳ Waiting for LocalStack to be ready..."
+          for i in {1..30}; do
+            if curl -s http://localhost:4566/_localstack/health > /dev/null 2>&1; then
+              echo "✅ LocalStack is ready"
+              break
+            fi
+            echo "  Waiting... ($i/30)"
+            sleep 2
+          done
 
-      - name: Health Check on Remote Server
-        env:
-          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
-          TEST_SERVER_USER: ${{ secrets.TEST_SERVER_USER }}
-          TEST_SERVER_KEY: ${{ secrets.TEST_SERVER_KEY }}
+      - name: Initialize LocalStack resources
         run: |
-          if [ -z "${TEST_SERVER_HOST}" ]; then
-            echo "⚠️  No remote server configured - skipping health checks"
-            exit 0
-          fi
+          echo "🔧 Initializing LocalStack resources..."
+          chmod +x init-localstack.sh
+          bash init-localstack.sh || echo "⚠️  Init script failed, continuing..."
           
-          echo "🔍 Checking health of services on ${TEST_SERVER_HOST}..."
+          echo "📋 Verifying resources..."
+          aws --endpoint-url=http://localhost:4566 sqs list-queues --region us-east-1 || true
+          aws --endpoint-url=http://localhost:4566 dynamodb list-tables --region us-east-1 || true
+
+      - name: Start QAPI Services
+        run: |
+          echo "🚀 Starting QAPI_masiva..."
+          cd QAPI_masiva
+          nohup java -jar target/QAPI_FacturacionMasiva-1.1.1.jar --spring.profiles.active=dev > ../masiva.log 2>&1 &
+          echo $! > ../masiva.pid
+          cd ..
           
-          mkdir -p ~/.ssh
-          echo "${TEST_SERVER_KEY}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${TEST_SERVER_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true
+          echo "🚀 Starting QAPI_worker..."
+          cd QAPI_worker
+          nohup java -jar target/QAPI_FacturacionMasivaWorker-1.1.0.jar --spring.profiles.active=dev > ../worker.log 2>&1 &
+          echo $! > ../worker.pid
+          cd ..
           
-          # Execute health checks on remote server
-          ssh ${TEST_SERVER_USER}@${TEST_SERVER_HOST} << 'EOF'
-            set -e
-            
-            echo "Waiting for services to be ready..."
-            sleep 15
-            
-            # Check QAPI_masiva
-            echo "Checking QAPI_masiva (port 8080)..."
+          echo "⏳ Waiting for services to start..."
+          sleep 20
+
+      - name: Health Checks
+        run: |
+          echo "🔍 Running health checks..."
+          
+          # Check QAPI_masiva
+          echo "Checking QAPI_masiva (port 8080)..."
+          for i in {1..30}; do
             MASIVA_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/actuator/health || echo "000")
             if [ "$MASIVA_STATUS" = "200" ]; then
               echo "✅ QAPI_masiva is healthy"
-            else
-              echo "❌ QAPI_masiva is not healthy (HTTP $MASIVA_STATUS)"
-              exit 1
+              break
             fi
-            
-            # Check QAPI_worker
-            echo "Checking QAPI_worker (port 8081)..."
+            echo "  Waiting for QAPI_masiva... ($i/30) HTTP $MASIVA_STATUS"
+            sleep 3
+          done
+          
+          if [ "$MASIVA_STATUS" != "200" ]; then
+            echo "❌ QAPI_masiva failed to start"
+            echo "📜 Last 50 lines of masiva.log:"
+            tail -50 masiva.log || true
+            exit 1
+          fi
+          
+          # Check QAPI_worker
+          echo "Checking QAPI_worker (port 8081)..."
+          for i in {1..30}; do
             WORKER_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8081/actuator/health || echo "000")
             if [ "$WORKER_STATUS" = "200" ]; then
               echo "✅ QAPI_worker is healthy"
-            else
-              echo "❌ QAPI_worker is not healthy (HTTP $WORKER_STATUS)"
-              exit 1
+              break
             fi
-            
-            # Check LocalStack
-            echo "Checking LocalStack (port 4566)..."
-            LOCALSTACK_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4566/_localstack/health || echo "000")
-            if [ "$LOCALSTACK_STATUS" = "200" ]; then
-              echo "✅ LocalStack is healthy"
-            else
-              echo "⚠️  LocalStack may not be healthy (HTTP $LOCALSTACK_STATUS)"
-            fi
-            
-            echo ""
-            echo "🎉 All services are healthy!"
-          EOF
+            echo "  Waiting for QAPI_worker... ($i/30) HTTP $WORKER_STATUS"
+            sleep 3
+          done
+          
+          if [ "$WORKER_STATUS" != "200" ]; then
+            echo "⚠️  QAPI_worker may not be healthy (HTTP $WORKER_STATUS)"
+            echo "📜 Last 50 lines of worker.log:"
+            tail -50 worker.log || true
+          fi
+          
+          # Check LocalStack
+          echo "Checking LocalStack (port 4566)..."
+          LOCALSTACK_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:4566/_localstack/health || echo "000")
+          if [ "$LOCALSTACK_STATUS" = "200" ]; then
+            echo "✅ LocalStack is healthy"
+          else
+            echo "⚠️  LocalStack may not be healthy (HTTP $LOCALSTACK_STATUS)"
+          fi
+          
+          echo ""
+          echo "🎉 Health checks completed!"
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "🧹 Cleaning up..."
+          if [ -f masiva.pid ]; then
+            kill $(cat masiva.pid) 2>/dev/null || true
+          fi
+          if [ -f worker.pid ]; then
+            kill $(cat worker.pid) 2>/dev/null || true
+          fi
+          docker-compose down || true
 
       - name: Notify deployment
         if: always()
